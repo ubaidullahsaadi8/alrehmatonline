@@ -115,12 +115,12 @@ export default function AdminDashboardLayout({ children }: AdminLayoutProps) {
       href: "/admin/testimonials",
       icon: Star,
       title: "Testimonials",
-    },
-    {
-      href: "/admin/password-tools",
-      icon: Settings,
-      title: "Password Tools",
-    },
+    },   
+    // {
+    //   href: "/admin/password-tools",
+    //   icon: Settings,
+    //   title: "Password Tools",
+    // },
     {
       href: "/admin/settings",
       icon: Settings,
