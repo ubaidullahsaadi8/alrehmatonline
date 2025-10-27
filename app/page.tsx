@@ -11,8 +11,8 @@ export default function Page() {
     <div className="bg-white">
       <Navbar />
       {/* Add padding top to account for fixed header with top bar */}
-      <div className="pt-[80px]">
-        <HeroSectionStunning />
+      <div className="pt-[56px]">
+        <HeroSectionStunning />   
         <ThreeStepsSectionStunning />
         <WhyChooseSectionStunning />
         <ServicesSectionStunning />

@@ -51,7 +51,7 @@ export default function Navbar() {
     <>
       {/* Top Contact Bar - Clean & Simple */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-[#0f3a2e]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
           <div className="flex items-center justify-between">
             {/* Quranic Verse */}
             <div className="hidden md:flex items-center gap-2 text-[#E6B325] font-amiri text-sm">
@@ -75,18 +75,18 @@ export default function Navbar() {
       </div>
 
       {/* Main Header - Clean & Professional */}
-      <header className={`fixed top-[34px] left-0 right-0 z-50 bg-white border-b border-gray-200 transition-all duration-300 ${
+      <header className={`fixed top-[0px] left-0 right-0 z-50 bg-white border-b border-gray-200 transition-all duration-300 ${
         scrolled ? 'shadow-lg' : ''
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between" >
           {/* Logo - Just PNG */}
           <Link href="/" className="flex items-center">
             <Image 
               src={logo} 
-              alt="LearnQuraan Logo" 
+              alt="LearnQuraan Logo"    
               width={140} 
-              height={50} 
-              className="h-10 md:h-12 w-auto object-contain"
+              height={55} 
+              className="h-9 md:h-11 w-auto object-contain"
               priority
             />
           </Link>
@@ -208,72 +208,72 @@ export default function Navbar() {
         />
       )}
 
-      {/* Offcanvas Mobile Menu */}
-      <div className={`fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-white to-gray-50 shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
+      {/* Offcanvas Mobile Menu - Fully Responsive */}
+      <div className={`fixed top-0 right-0 h-full w-[85%] sm:w-[70%] md:w-96 bg-gradient-to-br from-white to-gray-50 shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
         mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
-        {/* Offcanvas Header */}
-        <div className="relative bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] p-5 border-b-4 border-[#E6B325]">
+        {/* Offcanvas Header - Responsive */}
+        <div className="relative bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] p-3 sm:p-4 md:p-5 border-b-4 border-[#E6B325]">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Image 
                 src={logo} 
                 alt="LearnQuraan Logo" 
-                width={120} 
-                height={40} 
-                className="h-12 w-auto object-contain"
+                width={100} 
+                height={35} 
+                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
               />
             </div>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+              className="p-1.5 sm:p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </button>
           </div>
-          <p className="text-white/80 text-xs mt-2">Online Quran Academy</p>
+          <p className="text-white/80 text-[10px] sm:text-xs mt-1 sm:mt-2">Online Quran Academy</p>
         </div>
 
-        {/* Offcanvas Navigation */}
-        <nav className="flex flex-col p-5 space-y-2 overflow-y-auto h-[calc(100%-180px)]">
+        {/* Offcanvas Navigation - Responsive */}
+        <nav className="flex flex-col p-3 sm:p-4 md:p-5 space-y-1.5 sm:space-y-2 overflow-y-auto h-[calc(100%-160px)] sm:h-[calc(100%-170px)] md:h-[calc(100%-180px)]">
           <Link
             href="/"
-            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-lg sm:rounded-xl transition-all font-semibold text-sm sm:text-base group"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
             Home
           </Link>
           <Link
             href="/testimonials"
-            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-lg sm:rounded-xl transition-all font-semibold text-sm sm:text-base group"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
             Reviews
           </Link>
           <Link
             href="/courses"
-            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-lg sm:rounded-xl transition-all font-semibold text-sm sm:text-base group"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
             Courses
           </Link>
           <Link
             href="/services"
-            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-lg sm:rounded-xl transition-all font-semibold text-sm sm:text-base group"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
             Services
           </Link>
           <Link
             href="/contact"
-            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-lg sm:rounded-xl transition-all font-semibold text-sm sm:text-base group"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
             Contact
           </Link>
 
@@ -281,13 +281,13 @@ export default function Navbar() {
             <div className="h-10 w-full bg-gray-200 animate-pulse rounded-lg mt-4" />
           ) : user ? (
             <>
-              <div className="border-t border-gray-300 pt-4 mt-4 space-y-2">
+              <div className="border-t border-gray-300 pt-3 sm:pt-4 mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+                  className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-lg sm:rounded-xl transition-all font-semibold text-sm sm:text-base group"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <User className="h-5 w-5 group-hover:text-[#E6B325]" />
+                  <User className="h-4 w-4 sm:h-5 sm:w-5 group-hover:text-[#E6B325]" />
                   <span>My Profile</span>
                 </Link>
                 <button
@@ -295,9 +295,9 @@ export default function Navbar() {
                     logout();
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full flex items-center gap-3 px-4 py-3.5 text-red-600 hover:text-white hover:bg-red-600 rounded-xl transition-all font-semibold text-base"
+                  className="w-full flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 text-red-600 hover:text-white hover:bg-red-600 rounded-lg sm:rounded-xl transition-all font-semibold text-sm sm:text-base"
                 >
-                  <LogOut className="h-5 w-5" />
+                  <LogOut className="h-4 w-4 sm:h-5 sm:w-5" />
                   <span>Logout</span>
                 </button>
               </div>
@@ -305,16 +305,16 @@ export default function Navbar() {
           ) : null}
         </nav>
 
-        {/* Offcanvas Footer - Auth Buttons */}
+        {/* Offcanvas Footer - Auth Buttons - Responsive */}
         {!user && (
-          <div className="absolute bottom-0 left-0 right-0 p-5 border-t-2 border-gray-200 bg-white space-y-3">
+          <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 border-t-2 border-gray-200 bg-white space-y-2 sm:space-y-2.5 md:space-y-3">
             <Link href="/signup" onClick={() => setMobileMenuOpen(false)} className="block">
-              <Button className="w-full bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] hover:from-[#1a4d3c] hover:to-[#0f3a2e] text-white py-3.5 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all text-base">
+              <Button className="w-full bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] hover:from-[#1a4d3c] hover:to-[#0f3a2e] text-white py-2.5 sm:py-3 md:py-3.5 rounded-lg sm:rounded-xl font-bold shadow-lg hover:shadow-xl transition-all text-sm sm:text-base">
                 Sign Up
               </Button>
             </Link>
             <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block">
-              <Button className="w-full bg-gradient-to-r from-[#E6B325] to-[#D4A017] hover:from-[#D4A017] hover:to-[#E6B325] text-white py-3.5 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all text-base">
+              <Button className="w-full bg-gradient-to-r from-[#E6B325] to-[#D4A017] hover:from-[#D4A017] hover:to-[#E6B325] text-white py-2.5 sm:py-3 md:py-3.5 rounded-lg sm:rounded-xl font-bold shadow-lg hover:shadow-xl transition-all text-sm sm:text-base">
                 Login
               </Button>
             </Link>
