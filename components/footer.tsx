@@ -184,19 +184,19 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                 <a href="mailto:info@alrehmat-quran.com" className="text-emerald-100 hover:text-amber-300 transition-colors text-sm">
-                  info@alrehmat-quran.com
+                  alrehmatonlinequraanacademy@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                 <a href="tel:+923157632415" className="text-emerald-100 hover:text-amber-300 transition-colors text-sm">
-                  +92 315 7632415
+                  +92 324 8335750
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                 <span className="text-emerald-100 text-sm">
-                  Bhera, Sargodha, Punjab<br />Pakistan
+                  Bhera, Punjab<br />Pakistan
                 </span>
               </li>
             </ul>

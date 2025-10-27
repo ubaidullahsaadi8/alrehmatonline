@@ -239,7 +239,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">Email</h3>
-                    <p className="text-gray-600">contact@hatbrain.com</p>
+                    <p className="text-gray-600">alrehmatonlinequraanacademy@gmail.com</p>
                   </div>
                 </div>
 
@@ -249,7 +249,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">Phone</h3>
-                    <p className="text-gray-600">+92 315 7632415</p>
+                    <p className="text-gray-600">+92 324 8335750</p>
                   </div>
                 </div>
 
@@ -259,7 +259,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">Office</h3>
-                    <p className="text-gray-600">Bhera, Sargodha, Punjab Pakistan</p>
+                    <p className="text-gray-600">Sargodha, Punjab, Pakistan</p>
                   </div>
                 </div>
               </div>
