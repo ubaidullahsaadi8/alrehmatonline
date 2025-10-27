@@ -48,19 +48,19 @@ export default function NotificationBell() {
         <TooltipTrigger asChild>
           <Link 
             href={notificationLink} 
-            className="relative inline-flex items-center p-1.5 hover:bg-white/5 transition-colors"
+            className="relative inline-flex items-center p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label={`${count} notifications`}
           >
-            <Bell className="h-[18px] w-[18px] text-white" />
+            <Bell className="h-5 w-5 text-gray-700" />
             {count > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] text-xs flex items-center justify-center bg-red-500 text-white px-1 font-medium" style={{ borderRadius: "50%" }}>
+              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] text-xs flex items-center justify-center bg-red-500 text-white px-1 font-bold rounded-full">
                 {count > 99 ? '99+' : count}
               </span>
             )}
           </Link>
         </TooltipTrigger>
-        <TooltipContent side="bottom" className="bg-gray-800 text-white" style={{ border: "none", outline: "none", boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.4)" }}>
-          <p>{count === 0 ? 'No new notifications' : count === 1 ? '1 notification' : `${count} notifications`}</p>
+        <TooltipContent side="bottom" className="bg-gray-900 text-white border-none shadow-lg">
+          <p className="text-sm">{count === 0 ? 'No new notifications' : count === 1 ? '1 notification' : `${count} notifications`}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

@@ -269,71 +269,25 @@ export default function NotificationsPage() {
       
       {/* Stunning Hero Section */}
       <section className="relative pt-32 pb-12 sm:pb-14 md:pb-16 bg-gradient-to-br from-[#0f3a2e]/5 via-white to-[#E6B325]/5 overflow-hidden">
-        {/* Mega Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating Particles */}
-          {[...Array(25)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full animate-float-particle"
-              style={{
-                width: `${Math.random() * 6 + 2}px`,
-                height: `${Math.random() * 6 + 2}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                background: i % 2 === 0 ? "#E6B325" : "#0f3a2e",
-                opacity: 0.2,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${10 + Math.random() * 20}s`,
-              }}
-            />
-          ))}
-
-          {/* Islamic Pattern */}
-          <div className="absolute inset-0 opacity-[0.03]">
-            <svg width="100%" height="100%">
-              <defs>
-                <pattern id="dash-notif-pattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
-                  <circle cx="60" cy="60" r="45" fill="none" stroke="#D4A017" strokeWidth="2" opacity="0.6">
-                    <animateTransform
-                      attributeName="transform"
-                      type="rotate"
-                      from="0 60 60"
-                      to="360 60 60"
-                      dur="40s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                  <circle cx="60" cy="60" r="30" fill="none" stroke="#0f3a2e" strokeWidth="1.5" opacity="0.4">
-                    <animateTransform
-                      attributeName="transform"
-                      type="rotate"
-                      from="360 60 60"
-                      to="0 60 60"
-                      dur="30s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#dash-notif-pattern)" />
-            </svg>
-          </div>
-          
-          {/* Gradient Orbs */}
-          <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-[#E6B325]/30 to-transparent rounded-full blur-3xl animate-mega-pulse" />
-          <div className="absolute bottom-0 right-0 w-[700px] h-[700px] bg-gradient-to-tl from-[#0f3a2e]/20 to-transparent rounded-full blur-3xl animate-mega-pulse-reverse" />
+        {/* Simple Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <svg width="100%" height="100%">
+            <defs>
+              <pattern id="dots-notifications" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="20" cy="20" r="1.5" fill="#0f3a2e" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots-notifications)" />
+          </svg>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 z-10">
           {/* Badge */}
-          <div className="flex items-center gap-2 px-4 sm:px-6 py-3 mx-auto mb-4 sm:mb-5 md:mb-6 rounded-full bg-gradient-to-r from-[#E6B325]/30 via-[#D4A017]/20 to-[#E6B325]/30 border-2 border-[#E6B325]/50 w-max backdrop-blur-md shadow-2xl shadow-[#E6B325]/30 animate-glow-pulse">
-            <Sparkles className="w-5 h-5 text-[#D4A017] animate-spin-slow" />
-            <Bell className="w-5 h-5 text-[#E6B325] animate-bounce-subtle" />
-            <span className="text-sm font-black text-[#0f3a2e] uppercase tracking-widest">
-              {unreadCount} Unread Notifications
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 mx-auto mb-5 rounded-full bg-gradient-to-r from-[#0f3a2e]/10 to-[#E6B325]/10 border border-[#E6B325]/30">
+            <Bell className="w-4 h-4 text-[#0f3a2e]" />
+            <span className="text-sm font-semibold text-[#0f3a2e]">
+              {unreadCount} Unread
             </span>
-            <TrendingUp className="w-5 h-5 text-[#D4A017] animate-pulse" />
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 text-center mb-4 animate-fade-in-scale">
