@@ -7,19 +7,19 @@ import { useState, useEffect, useRef } from "react";
 
 const slides = [
   {
-    image: "https://images.pexels.com/photos/8923965/pexels-photo-8923965.jpeg?auto=compress&cs=tinysrgb&w=600",
-    arabicQuote: "طَلَبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ",
-    englishQuote: "Seek knowledge from the cradle to the grave.",
+    image: "https://alhudanetwork.co.uk/wp-content/uploads/2025/07/hero-image-1.png?auto=compress&cs=tinysrgb&w=600",
+    arabicQuote: "طَلَبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ",      
+    englishQuote: "Seek knowledge from the cradle to the grave.",   
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
   },
   {
-    image: "https://images.pexels.com/photos/6209131/pexels-photo-6209131.jpeg?auto=compress&cs=tinysrgb&w=600",
-    arabicQuote: "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
+    image: "https://www.onlinequrancourses.com/wp-content/uploads/2023/04/quran-for-kids.webp?auto=compress&cs=tinysrgb&w=600",
+    arabicQuote: "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",  
     englishQuote: "Read in the name of your Lord who created.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
-  },
+  },   
   {
-    image: "https://images.pexels.com/photos/8923988/pexels-photo-8923988.jpeg?auto=compress&cs=tinysrgb&w=600",
+    image: "https://alhafidzacademy.com/wp-content/uploads/2023/10/istockphoto-505625470-612x612-1.jpg.webp?auto=compress&cs=tinysrgb&w=600",
     arabicQuote: "رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا",
     englishQuote: "My Lord, increase me in knowledge and understanding.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
@@ -58,7 +58,7 @@ export default function HeroSectionStunning() {
 
       {/* Main Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-16 items-center">
           
           {/* Left Side - Content */}
           <div className="order-2 lg:order-1 space-y-4 md:space-y-5">
@@ -114,7 +114,7 @@ export default function HeroSectionStunning() {
           </div>
 
           {/* Right Side - Image (Smaller) */}
-          <div className="order-1 lg:order-2 relative max-w-sm md:max-w-md mx-auto lg:mx-0">
+          <div className="order-1 lg:order-2 relative max-w-xs md:max-w-sm mx-auto">
             {slides.map((slide, index) => (
               <div
                 key={index}
@@ -126,7 +126,7 @@ export default function HeroSectionStunning() {
                   <img
                     src={slide.image}
                     alt="Children Learning Quran"
-                    className="w-full h-[280px] md:h-[350px] lg:h-[400px] object-cover object-center"
+                    className="w-full h-[240px] md:h-[280px] lg:h-[320px] object-cover object-center"
                   />
                   {/* Overlay Gradient with 2 colors */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f3a2e]/30 via-[#E6B325]/10 to-transparent"></div>

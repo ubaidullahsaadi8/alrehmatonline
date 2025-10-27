@@ -8,24 +8,24 @@ import { useState, useEffect } from "react";
 const slides = [
   {
     image:
-      "https://images.pexels.com/photos/8923965/pexels-photo-8923965.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://alhafidzacademy.com/wp-content/uploads/2023/10/istockphoto-505625470-612x612-1.jpg.webp",
     arabicQuote: "طَلَبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ",
     englishQuote: "Seek knowledge from the cradle to the grave.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
   },
   {
     image:
-      "https://images.pexels.com/photos/6209131/pexels-photo-6209131.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://alhafidzacademy.com/wp-content/uploads/2023/10/istockphoto-505625470-612x612-1.jpg.webp",
     arabicQuote: "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
     englishQuote: "Read in the name of your Lord who created.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
-  },
+  },   
   {
     image:
-      "https://images.pexels.com/photos/8923988/pexels-photo-8923988.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://alhafidzacademy.com/wp-content/uploads/2023/10/istockphoto-505625470-612x612-1.jpg.webp",
     arabicQuote: "رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا",
     englishQuote: "My Lord, increase me in knowledge and understanding.",
-    hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+    hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",    
   },
 ];
 
