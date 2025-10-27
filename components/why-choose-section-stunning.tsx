@@ -232,7 +232,7 @@ export default function WhyChooseSectionStunning() {
               <div className="relative rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-6 sm:border-8 border-white group-hover:shadow-[0_30px_80px_rgba(230,179,37,0.4)] transition-all duration-700 transform group-hover:scale-105 group-hover:-rotate-2">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#E6B325]/20 via-transparent to-[#0f3a2e]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
                 <img
-                  src="https://images.pexels.com/photos/8923965/pexels-photo-8923965.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  src="https://resala-academy.com/wp-content/uploads/2022/11/Online-Quran-female-teacher.jpg?auto=compress&cs=tinysrgb&w=600"
                   alt="Children Learning Quran"
                   className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] object-cover object-center group-hover:scale-110 transition-transform duration-1000"
                 />
