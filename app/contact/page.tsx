@@ -268,20 +268,36 @@ export default function ContactPage() {
                 <h3 className="font-bold text-gray-900 mb-6 text-2xl">Business Hours</h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center text-gray-700 pb-4 border-b border-gray-200">
-                    <span className="font-medium">Monday - Friday</span>
-                    <span className="font-semibold text-[#0f3a2e]">9:00 AM - 6:00 PM</span>
+                    <span className="font-medium">Monday</span>
+                    <span className="font-semibold text-[#0f3a2e]">24 Hours</span>
+                  </div>
+                  <div className="flex justify-between items-center text-gray-700 pb-4 border-b border-gray-200">
+                    <span className="font-medium">Tuesday</span>
+                    <span className="font-semibold text-[#0f3a2e]">24 Hours</span>
+                  </div>
+                  <div className="flex justify-between items-center text-gray-700 pb-4 border-b border-gray-200">
+                    <span className="font-medium">Wednesday</span>
+                    <span className="font-semibold text-[#0f3a2e]">24 Hours</span>
+                  </div>
+                  <div className="flex justify-between items-center text-gray-700 pb-4 border-b border-gray-200">
+                    <span className="font-medium">Thursday</span>
+                    <span className="font-semibold text-[#0f3a2e]">24 Hours</span>
+                  </div>
+                  <div className="flex justify-between items-center text-gray-700 pb-4 border-b border-gray-200">
+                    <span className="font-medium">Friday</span>
+                    <span className="font-semibold text-[#0f3a2e]">24 Hours</span>
                   </div>
                   <div className="flex justify-between items-center text-gray-700 pb-4 border-b border-gray-200">
                     <span className="font-medium">Saturday</span>
-                    <span className="font-semibold text-[#0f3a2e]">10:00 AM - 4:00 PM</span>
+                    <span className="font-semibold text-[#0f3a2e]">24 Hours</span>
                   </div>
                   <div className="flex justify-between items-center text-gray-700">
                     <span className="font-medium">Sunday</span>
-                    <span className="font-semibold text-[#E6B325]">Closed</span>
-                  </div>
+                    <span className="font-semibold text-[#0f3a2e]">24 Hours</span>
+                  </div>    
                 </div>
               </div>
-            </div>
+            </div>   
           </div>
         </div>
       </section>

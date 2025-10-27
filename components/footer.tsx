@@ -183,20 +183,20 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@alrehmat-quran.com" className="text-emerald-100 hover:text-amber-300 transition-colors text-sm">
+                <a href="mailto:alrehmatonlinequraanacademy@gmail.com" className="text-emerald-100 hover:text-amber-300 transition-colors text-sm">
                   alrehmatonlinequraanacademy@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-                <a href="tel:+923157632415" className="text-emerald-100 hover:text-amber-300 transition-colors text-sm">
+                <a href="tel:+923248335750" className="text-emerald-100 hover:text-amber-300 transition-colors text-sm">
                   +92 324 8335750
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                 <span className="text-emerald-100 text-sm">
-                  Bhera, Punjab<br />Pakistan
+                  Bhera, Punjab, Pakistan
                 </span>
               </li>
             </ul>
@@ -210,9 +210,9 @@ export default function Footer() {
         <div className="border-t border-white/10 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-emerald-200 text-sm text-center md:text-left">
-              &copy; {currentYear} AL-REHMAT Online Quran Academy. All rights reserved.
+              &copy; {currentYear} AL-REHMAT Online Quran Academy. All rights reserved. Developed by <a href="https://hatbrain.tech" target="_blank" rel="noopener noreferrer" className="text-emerald-200 hover:text-amber-300 transition-colors">HatBrain</a>
             </p>
-            <div className="flex gap-6 text-sm">
+            <div className="flex gap-6 text-sm">   
               <Link href="/privacy-policy" className="text-emerald-200 hover:text-amber-300 transition-colors">
                 Privacy Policy
               </Link>
