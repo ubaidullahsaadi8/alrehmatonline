@@ -59,81 +59,30 @@ export default function WhyChooseSectionStunning() {
       ref={sectionRef}
       className="relative py-12 sm:py-14 md:py-16 lg:py-20 mt-0 bg-gradient-to-br from-[#0f3a2e]/5 via-white to-[#E6B325]/5 overflow-hidden"
     >
-      {/* Mega Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Particles */}
-        {[...Array(25)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full animate-float-particle"
-            style={{
-              width: `${Math.random() * 5 + 2}px`,
-              height: `${Math.random() * 5 + 2}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: i % 2 === 0 ? "#E6B325" : "#0f3a2e",
-              opacity: 0.2,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${10 + Math.random() * 20}s`,
-            }}
-          />
-        ))}
-
-        {/* Rotating Islamic Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <svg width="100%" height="100%">
-            <defs>
-              <pattern id="why-choose-pattern" x="0" y="0" width="110" height="110" patternUnits="userSpaceOnUse">
-                <circle cx="55" cy="55" r="40" fill="none" stroke="#D4A017" strokeWidth="2">
-                  <animateTransform
-                    attributeName="transform"
-                    type="rotate"
-                    from="0 55 55"
-                    to="360 55 55"
-                    dur="35s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-                <circle cx="55" cy="55" r="25" fill="none" stroke="#0f3a2e" strokeWidth="1.5">
-                  <animateTransform
-                    attributeName="transform"
-                    type="rotate"
-                    from="360 55 55"
-                    to="0 55 55"
-                    dur="25s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-                <path d="M55 15 L85 55 L55 95 L25 55 Z" fill="none" stroke="#D4A017" strokeWidth="1.5" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#why-choose-pattern)" />
-          </svg>
-        </div>
-
-        {/* Mega Gradient Orbs */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#E6B325]/25 to-transparent rounded-full blur-3xl animate-mega-pulse" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-[#0f3a2e]/20 to-transparent rounded-full blur-3xl animate-mega-pulse-reverse" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-gradient-to-r from-[#D4A017]/15 to-transparent rounded-full blur-3xl animate-spin-slow" />
+      {/* Simple Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <svg width="100%" height="100%">
+          <defs>
+            <pattern id="dots-pattern-2" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="1.5" fill="#0f3a2e" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dots-pattern-2)" />
+        </svg>
       </div>
-
-      {/* Animated Accent Lines */}
-      <div className="absolute left-0 top-1/4 w-2 h-1/3 bg-gradient-to-b from-[#E6B325] to-[#D4A017] rounded-r-full animate-slide-right" />
-      <div className="absolute right-0 top-1/2 w-2 h-1/4 bg-gradient-to-b from-[#D4A017] to-[#E6B325] rounded-l-full animate-slide-left" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 z-10">
         <div className="grid md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 lg:gap-20 items-center">
           {/* LEFT SIDE - Content */}
           <div className="order-2 md:order-1">
             {/* Badge */}
-            <div className={`flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 mb-5 sm:mb-6 rounded-full bg-gradient-to-r from-[#E6B325]/30 via-[#D4A017]/20 to-[#E6B325]/30 border-2 border-[#E6B325]/50 w-max backdrop-blur-md shadow-xl shadow-[#E6B325]/30 ${
-              hasAnimated ? 'animate-glow-pulse' : 'opacity-0'
+            <div className={`inline-flex items-center gap-2 px-5 py-2.5 mb-5 rounded-full bg-gradient-to-r from-[#0f3a2e]/10 to-[#E6B325]/10 border border-[#E6B325]/30 ${
+              hasAnimated ? 'opacity-100' : 'opacity-0'
             }`}>
-              <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-[#E6B325] animate-bounce-subtle" />
-              <span className="text-xs sm:text-sm md:text-base font-black text-[#0f3a2e] uppercase tracking-widest">
+              <div className="w-2 h-2 bg-[#E6B325] rounded-full"></div>
+              <span className="text-sm font-semibold text-[#0f3a2e] uppercase tracking-wide">
                 Why Choose Us
               </span>
-              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4A017] fill-[#D4A017] animate-pulse" />
             </div>
 
             {/* Arabic Heading */}

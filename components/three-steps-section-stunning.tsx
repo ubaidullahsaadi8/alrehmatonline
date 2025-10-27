@@ -56,67 +56,27 @@ export default function ThreeStepsSectionStunning() {
       ref={sectionRef}
       className="relative py-12 sm:py-14 md:py-16 lg:py-20 mt-0 bg-gradient-to-br from-white via-[#E6B325]/5 to-white overflow-hidden"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Particles */}
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full animate-float-particle"
-            style={{
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: i % 2 === 0 ? "#E6B325" : "#0f3a2e",
-              opacity: 0.15,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${10 + Math.random() * 15}s`,
-            }}
-          />
-        ))}
-
-        {/* Rotating Islamic Pattern */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <svg width="100%" height="100%">
-            <defs>
-              <pattern id="steps-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                <circle cx="50" cy="50" r="35" fill="none" stroke="#D4A017" strokeWidth="1.5">
-                  <animateTransform
-                    attributeName="transform"
-                    type="rotate"
-                    from="0 50 50"
-                    to="360 50 50"
-                    dur="30s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-                <path d="M50 15 L85 50 L50 85 L15 50 Z" fill="none" stroke="#0f3a2e" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#steps-pattern)" />
-          </svg>
-        </div>
-
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-[#E6B325]/20 to-transparent rounded-full blur-3xl animate-mega-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-tl from-[#0f3a2e]/15 to-transparent rounded-full blur-3xl animate-mega-pulse-reverse" />
+      {/* Simple Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <svg width="100%" height="100%">
+          <defs>
+            <pattern id="dots-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <circle cx="20" cy="20" r="1.5" fill="#0f3a2e" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#dots-pattern)" />
+        </svg>
       </div>
-
-      {/* Accent Lines */}
-      <div className="absolute left-0 top-1/3 w-2 h-1/4 bg-gradient-to-b from-[#E6B325] to-[#D4A017] rounded-r-full animate-slide-right" />
-      <div className="absolute right-0 top-1/2 w-2 h-1/5 bg-gradient-to-b from-[#D4A017] to-[#E6B325] rounded-l-full animate-slide-left" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 z-10">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
           {/* Badge */}
-          <div className="flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 mx-auto mb-5 sm:mb-6 rounded-full bg-gradient-to-r from-[#E6B325]/25 via-[#D4A017]/15 to-[#E6B325]/25 border-2 border-[#E6B325]/40 w-max backdrop-blur-md shadow-xl shadow-[#E6B325]/20 animate-glow-pulse">
-            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-[#D4A017] animate-spin-slow" />
-            <span className="text-xs sm:text-sm md:text-base font-black text-[#0f3a2e] uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 mx-auto mb-5 rounded-full bg-gradient-to-r from-[#0f3a2e]/10 to-[#E6B325]/10 border border-[#E6B325]/30">
+            <div className="w-2 h-2 bg-[#E6B325] rounded-full"></div>
+            <span className="text-sm font-semibold text-[#0f3a2e] uppercase tracking-wide">
               Simple Process
             </span>
-            <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[#E6B325] animate-pulse" />
           </div>
 
           {/* Arabic Heading */}
