@@ -191,12 +191,12 @@ export default function Footer() {
                 <Phone className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                 <a href="tel:+923248335750" className="text-emerald-100 hover:text-amber-300 transition-colors text-sm">
                   +92 324 8335750
-                </a>
+                </a>  
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
                 <span className="text-emerald-100 text-sm">
-                  Bhera, Punjab, Pakistan
+                  Sargodha, Punjab, Pakistan
                 </span>
               </li>
             </ul>
