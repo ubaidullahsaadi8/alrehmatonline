@@ -10,12 +10,15 @@ export default function Page() {
   return (
     <div className="bg-white">
       <Navbar />
-      <HeroSectionStunning />
-      <ThreeStepsSectionStunning />
-      <WhyChooseSectionStunning />
-      <ServicesSectionStunning />
-      <HomeTestimonialsCarousel />
-      <Footer />
+      {/* Add padding top to account for fixed header with top bar */}
+      <div className="pt-[80px]">
+        <HeroSectionStunning />
+        <ThreeStepsSectionStunning />
+        <WhyChooseSectionStunning />
+        <ServicesSectionStunning />
+        <HomeTestimonialsCarousel />
+        <Footer />
+      </div>
     </div>
   )
 }

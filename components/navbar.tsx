@@ -21,7 +21,7 @@ import SimpleDropdown from "./simple-dropdown";
 import SimpleMenuItem, { SimpleMenuDivider } from "./simple-menu-item";
 import "@/styles/islamic-pattern.css";
 import Image from "next/image";
-import logo from "../public/white-logo.png"
+import logo from "../public/logo.png"
 
 
 
@@ -49,109 +49,94 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Contact Bar */}
-<div className="bg-[#dfb12c] px-4 sm:px-6 lg:px-8 py-1.5">
-  <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between items-center text-sm">
-    {/* Quranic Verse - Only show on md and up */}
-    <div className="text-white font-amiri text-lg hidden md:block">
-      <span>اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</span>
-    </div>
-
-    {/* Contact Info */}
-    <div
-      className="
-        flex items-center bg-[#D6A219] p-2 rounded-full 
-        w-full sm:w-auto mt-2 md:mt-0 
-        justify-center sm:justify-between md:justify-end 
-        gap-4 sm:gap-6
-      "
-    >
-      {/* Email - Always visible */}
-      <div className="flex items-center gap-2 text-white text-sm font-medium justify-center">
-        <Mail className="w-4 h-4" />
-        <span>info@learnquraan.com</span>
-      </div>
-
-      {/* Phone - Visible from 480px and up */}
-      <div className="hidden [@media(min-width:480px)]:flex items-center gap-2 text-white text-sm font-medium">
-        <Phone className="w-4 h-4" />
-        <span>+44 808 5310 303 (UK)</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-      <div className="decorative-border"></div>
-
-      {/* Main Header */}
-      <header className="islamic-pattern px-4 sm:px-6 lg:px-8 py-4 shadow-lg">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-3 md:gap-4">
-            <div className="h-18 md:h-20 flex items-center">
-              <Image src={logo} alt="LearnQuraan logo" width={180} height={60} priority className="h-full w-auto object-contain" sizes="(max-width: 640px) 120px, (max-width: 1024px) 140px, 160px" />
+      {/* Top Contact Bar - Clean & Simple */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-[#0f3a2e]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5">
+          <div className="flex items-center justify-between">
+            {/* Quranic Verse */}
+            <div className="hidden md:flex items-center gap-2 text-[#E6B325] font-amiri text-sm">
+              <BookOpen className="w-4 h-4" />
+              <span>اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</span>
             </div>
-            {/* <div className="flex flex-col">
-              <span className="text-2xl font-bold text-white leading-tight font-poppins">
-                LearnQura'an
-              </span>
-              <span className="text-xs text-white font-medium">
-                and the Arabic online
-              </span>
-            </div> */}
+            
+            {/* Contact Info */}
+            <div className="flex items-center gap-6">
+              <a href="mailto:info@learnquraan.com" className="flex items-center gap-2 text-white/90 hover:text-[#E6B325] transition-colors text-sm">
+                <Mail className="w-4 h-4" />
+                <span className="hidden sm:inline">info@learnquraan.com</span>
+              </a>
+              <a href="tel:+448085310303" className="flex items-center gap-2 text-white/90 hover:text-[#E6B325] transition-colors text-sm">
+                <Phone className="w-4 h-4" />
+                <span className="hidden sm:inline">+44 808 5310 303</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Header - Clean & Professional */}
+      <header className={`fixed top-[34px] left-0 right-0 z-50 bg-white border-b border-gray-200 transition-all duration-300 ${
+        scrolled ? 'shadow-lg' : ''
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
+          {/* Logo - Just PNG */}
+          <Link href="/" className="flex items-center">
+            <Image 
+              src={logo} 
+              alt="LearnQuraan Logo" 
+              width={140} 
+              height={50} 
+              className="h-10 md:h-12 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-1">
             <Link
               href="/"
-              className="text-white hover:text-[#DFB12C] transition-colors text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#DFB12C] after:transition-all after:duration-300 hover:after:w-full font-poppins"
+              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
             >
-              HOME
+              Home
             </Link>
             <Link
               href="/testimonials"
-              className="text-white hover:text-[#DFB12C] transition-colors text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#DFB12C] after:transition-all after:duration-300 hover:after:w-full font-poppins"
+              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
             >
-              REVIEWS
+              Reviews
             </Link>
             <Link
               href="/courses"
-              className="text-white hover:text-[#DFB12C] transition-colors text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#DFB12C] after:transition-all after:duration-300 hover:after:w-full font-poppins"
+              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
             >
-              COURSES
+              Courses
             </Link>
-
             <Link
               href="/services"
-              className="text-white hover:text-[#DFB12C] transition-colors text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#DFB12C] after:transition-all after:duration-300 hover:after:w-full font-poppins"
+              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
             >
-              SERVICES
+              Services
             </Link>
             <Link
               href="/contact"
-              className="text-white hover:text-[#DFB12C] transition-colors text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-[#DFB12C] after:transition-all after:duration-300 hover:after:w-full font-poppins"
+              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
             >
-              CONTACT US
+              Contact
             </Link>
           </nav>
 
-          {/* Login Button */}
+          {/* Right Side Actions */}
           <div className="hidden lg:flex items-center gap-3">
             {loading ? (
-              <div className="h-10 w-20 bg-white/20 animate-pulse rounded-full" />
+              <div className="h-10 w-20 bg-gray-200 animate-pulse rounded-full" />
             ) : user ? (
               <>
                 <NotificationBell />
                 <SimpleDropdown
                   align="right"
                   trigger={
-                    <div className="flex items-center gap-2 px-4 py-2 hover:bg-black/5 rounded-full transition-colors cursor-pointer">
-                      <div className="w-8 h-8 rounded-full overflow-hidden bg-white flex items-center justify-center">
+                    <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                      <div className="w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-[#0f3a2e] to-[#1a4d3c] flex items-center justify-center border-2 border-[#E6B325]">
                         {user.avatar ? (
                           <img
                             src={user.avatar}
@@ -159,15 +144,15 @@ export default function Navbar() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <span className="text-[#2D7A4F] font-bold text-xs">
+                          <span className="text-white font-bold text-sm">
                             {getInitials(user.name)}
                           </span>
                         )}
                       </div>
-                      <span className="text-white font-medium text-sm">
+                      <span className="text-gray-700 font-semibold text-sm">
                         {user.name.split(" ")[0]}
                       </span>
-                      <ChevronDown className="h-4 w-4 text-white" />
+                      <ChevronDown className="h-4 w-4 text-gray-500" />
                     </div>
                   }
                 >
@@ -190,13 +175,13 @@ export default function Navbar() {
             ) : (
               <div className="flex items-center gap-3">
                 <Link href="/signup">
-                  <Button className="bg-[#0f3a2e] hover:bg-[#1a4d3c] text-white px-6 py-2 rounded-full font-bold text-sm transition-all duration-300">
-                    SIGN UP
+                  <Button className="bg-[#0f3a2e] hover:bg-[#1a4d3c] text-white px-5 py-2 rounded-lg font-semibold text-sm transition-colors">
+                    Sign Up
                   </Button>
                 </Link>
                 <Link href="/login">
-                  <Button className="bg-[#DFB12C] hover:bg-[#D6A219] text-white px-6 py-2 rounded-full font-bold text-sm transition-all duration-300">
-                    LOGIN
+                  <Button className="bg-[#E6B325] hover:bg-[#D4A017] text-white px-5 py-2 rounded-lg font-semibold text-sm transition-colors">
+                    Login
                   </Button>
                 </Link>
               </div>
@@ -205,110 +190,137 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-  className="lg:hidden text-[#DFB12C] hover:text-[#D6A219] transition-colors"
-  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-  aria-label="Toggle menu"
->
-  {mobileMenuOpen ? (
-    <X className="w-6 h-6 text-[#DFB12C] hover:text-[#D6A219]" />
-  ) : (
-    <Menu className="w-6 h-6 text-[#DFB12C] hover:text-[#D6A219]" />
-  )}
-</button>
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <Menu className="w-6 h-6 text-gray-700" />
+          </button>
 
         </div>
+      </header>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#D4AF37] border-t mt-2 rounded-2xl border-black/10">
-  <nav className="flex flex-col px-4 py-4 space-y-2">
-    <Link
-      href="/"
-      className="text-gray-800 hover:text-[#0F3B2E] hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out"
-      onClick={() => setMobileMenuOpen(false)}
-    >
-      HOME
-    </Link>
-    <Link
-      href="/about"
-      className="text-gray-800 hover:text-[#0F3B2E] hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out"
-      onClick={() => setMobileMenuOpen(false)}
-    >
-      ABOUT
-    </Link>
-    <Link
-      href="/services"
-      className="text-gray-800 hover:text-[#0F3B2E] hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out"
-      onClick={() => setMobileMenuOpen(false)}
-    >
-      SERVICES
-    </Link>
-    <Link
-      href="/blog"
-      className="text-gray-800 hover:text-[#0F3B2E] hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out"
-      onClick={() => setMobileMenuOpen(false)}
-    >
-      BLOG
-    </Link>
-    <Link
-      href="/packages"
-      className="text-gray-800 hover:text-[#0F3B2E] hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out"
-      onClick={() => setMobileMenuOpen(false)}
-    >
-      PACKAGES
-    </Link>
-    <Link
-      href="/contact"
-      className="text-gray-800 hover:text-[#0F3B2E] hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out"
-      onClick={() => setMobileMenuOpen(false)}
-    >
-      CONTACT
-    </Link>
+      {/* Offcanvas Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
 
-    {loading ? (
-      <div className="h-10 w-full animate-pulse rounded mt-4" />
-    ) : user ? (
-      <>
-        <div className="border-t border-black/10 pt-4 mt-4">
+      {/* Offcanvas Mobile Menu */}
+      <div className={`fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-white to-gray-50 shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
+        mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}>
+        {/* Offcanvas Header */}
+        <div className="relative bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] p-5 border-b-4 border-[#E6B325]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Image 
+                src={logo} 
+                alt="LearnQuraan Logo" 
+                width={120} 
+                height={40} 
+                className="h-12 w-auto object-contain"
+              />
+            </div>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+          </div>
+          <p className="text-white/80 text-xs mt-2">Online Quran Academy</p>
+        </div>
+
+        {/* Offcanvas Navigation */}
+        <nav className="flex flex-col p-5 space-y-2 overflow-y-auto h-[calc(100%-180px)]">
           <Link
-            href="/dashboard"
-            className="flex items-center gap-2 text-gray-800 hover:text-[#0F3B2E] hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out"
+            href="/"
+            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <User className="h-4 w-4" />
-            <span>My Profile</span>
+            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            Home
           </Link>
-          <button
-            onClick={() => {
-              logout();
-              setMobileMenuOpen(false);
-            }}
-            className="w-full flex items-center gap-2 text-red-600 hover:text-red-700 hover:translate-x-2 hover:bg-black/5 font-medium py-2 px-4 rounded transition-all duration-300 ease-in-out mt-2"
+          <Link
+            href="/testimonials"
+            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            <LogOut className="h-4 w-4" />
-            <span>Logout</span>
-          </button>
-        </div>
-      </>
-    ) : (
-      <div className="border-t border-black/10 pt-4 mt-4 space-y-2">
-        <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-          <Button className="w-full bg-[#0F3B2E] hover:bg-[#1a4d3c] text-white rounded-full py-2 font-bold">
-            SIGN UP
-          </Button>
-        </Link>
-        <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-          <Button className="w-full bg-[#DFB12C] hover:bg-[#D6A219] text-white rounded-full py-2 font-bold">
-            LOGIN
-          </Button>
-        </Link>
-      </div>
-    )}
-  </nav>
-</div>
+            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            Reviews
+          </Link>
+          <Link
+            href="/courses"
+            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            Courses
+          </Link>
+          <Link
+            href="/services"
+            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            Services
+          </Link>
+          <Link
+            href="/contact"
+            className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <div className="w-2 h-2 rounded-full bg-[#E6B325] group-hover:bg-white transition-colors"></div>
+            Contact
+          </Link>
 
+          {loading ? (
+            <div className="h-10 w-full bg-gray-200 animate-pulse rounded-lg mt-4" />
+          ) : user ? (
+            <>
+              <div className="border-t border-gray-300 pt-4 mt-4 space-y-2">
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-3 px-4 py-3.5 text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-[#0f3a2e] hover:to-[#1a4d3c] rounded-xl transition-all font-semibold text-base group"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="h-5 w-5 group-hover:text-[#E6B325]" />
+                  <span>My Profile</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3.5 text-red-600 hover:text-white hover:bg-red-600 rounded-xl transition-all font-semibold text-base"
+                >
+                  <LogOut className="h-5 w-5" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            </>
+          ) : null}
+        </nav>
+
+        {/* Offcanvas Footer - Auth Buttons */}
+        {!user && (
+          <div className="absolute bottom-0 left-0 right-0 p-5 border-t-2 border-gray-200 bg-white space-y-3">
+            <Link href="/signup" onClick={() => setMobileMenuOpen(false)} className="block">
+              <Button className="w-full bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] hover:from-[#1a4d3c] hover:to-[#0f3a2e] text-white py-3.5 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all text-base">
+                Sign Up
+              </Button>
+            </Link>
+            <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block">
+              <Button className="w-full bg-gradient-to-r from-[#E6B325] to-[#D4A017] hover:from-[#D4A017] hover:to-[#E6B325] text-white py-3.5 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all text-base">
+                Login
+              </Button>
+            </Link>
+          </div>
         )}
-      </header>
+      </div>
     </>
   );
 }
