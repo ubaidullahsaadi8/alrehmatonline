@@ -58,10 +58,10 @@ export default function HeroSectionStunning() {
 
       {/* Main Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Left Side - Content */}
-          <div className="order-2 lg:order-1 space-y-4 md:space-y-5">
+          <div className="order-2 lg:order-1 space-y-4 md:space-y-5 max-w-xl">
             {/* Hadith Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#0f3a2e]/10 to-[#E6B325]/10 rounded-full border border-[#E6B325]/30">
               <div className="w-2 h-2 bg-[#E6B325] rounded-full animate-pulse"></div>
@@ -85,12 +85,12 @@ export default function HeroSectionStunning() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Link href="/signup" className="cursor-pointer">
-                <Button className="w-full sm:w-auto bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] hover:from-[#1a4d3c] hover:to-[#0f3a2e] text-white px-8 py-5 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all cursor-pointer">
+                <Button className="w-full sm:w-auto bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] hover:from-[#1a4d3c] hover:to-[#0f3a2e] text-white px-6 py-4 rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all cursor-pointer">
                   Start Free Trial
                 </Button>
               </Link>
               <Link href="/courses" className="cursor-pointer">
-                <Button className="w-full sm:w-auto bg-gradient-to-r from-[#E6B325] to-[#D4A017] hover:from-[#D4A017] hover:to-[#E6B325] text-white px-8 py-5 rounded-xl font-bold text-base shadow-lg hover:shadow-xl transition-all cursor-pointer">
+                <Button className="w-full sm:w-auto bg-gradient-to-r from-[#E6B325] to-[#D4A017] hover:from-[#D4A017] hover:to-[#E6B325] text-white px-6 py-4 rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all cursor-pointer">
                   View Courses
                 </Button>
               </Link>
@@ -113,8 +113,8 @@ export default function HeroSectionStunning() {
             </div>
           </div>
 
-          {/* Right Side - Image (Smaller) */}
-          <div className="order-1 lg:order-2 relative max-w-xs md:max-w-sm mx-auto">
+          {/* Right Side - Image (Fixed Width for Vertical Images) */}
+          <div className="order-1 lg:order-2 relative w-64 md:w-72 lg:w-80 mx-auto">
             {slides.map((slide, index) => (
               <div
                 key={index}
@@ -126,7 +126,7 @@ export default function HeroSectionStunning() {
                   <img
                     src={slide.image}
                     alt="Children Learning Quran"
-                    className="w-full h-[240px] md:h-[280px] lg:h-[320px] object-cover object-center"
+                    className="w-full h-[340px] md:h-[400px] lg:h-[450px] object-cover object-center"
                   />
                   {/* Overlay Gradient with 2 colors */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f3a2e]/30 via-[#E6B325]/10 to-transparent"></div>
