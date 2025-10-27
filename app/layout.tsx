@@ -11,6 +11,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { CurrencyProvider } from "@/lib/currency-context"
 import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "@/components/providers"
+import WhatsAppFloat from "@/components/whatsapp-float"
 
 export const metadata: Metadata = {
   title: "HatBrain - Software Development Company",
@@ -31,6 +32,7 @@ export default function RootLayout({
             <Providers>
               <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
               <Toaster />
+              <WhatsAppFloat />
             </Providers>
           </CurrencyProvider>
         </ThemeProvider>
