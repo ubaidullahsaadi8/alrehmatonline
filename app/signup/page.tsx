@@ -48,7 +48,7 @@ import { currencies } from "@/lib/currencies"
 export default function SignUpPage() {
   const [error, setError] = useState<string>("")
   const [loading, setLoading] = useState(false)
-  const [userType, setUserType] = useState<string>("simple")
+  const [userType, setUserType] = useState<string>("student")
   const [role, setRole] = useState<string>("user")
   const [showSuccess, setShowSuccess] = useState(false)
   const [username, setUsername] = useState("")
@@ -82,10 +82,8 @@ export default function SignUpPage() {
     // Set appropriate role based on selected user type
     if (userType === "instructor") {
       setRole("instructor");
-    } else if (userType === "student") {
-      setRole("student");
     } else {
-      setRole("user");
+      setRole("student");
     }
   }, [userType]);
 
@@ -221,44 +219,35 @@ export default function SignUpPage() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               <Tabs 
-                defaultValue="simple" 
+                defaultValue="student" 
                 value={userType}
                 onValueChange={(value) => {
                   setUserType(value);
                   
                   if (value === "instructor") {
                     setRole("instructor");
-                  } else if (value === "student") {
-                    setRole("student");
                   } else {
-                    setRole("user");
+                    setRole("student");
                   }
                 }}
                 className="mb-4"
               >
-                <TabsList className="grid grid-cols-3 mb-4 bg-white">
-                  <TabsTrigger value="simple" className="data-[state=active]:bg-[#E6B325] data-[state=active]:text-white">Simple Account</TabsTrigger>
-                  <TabsTrigger value="student" className="data-[state=active]:bg-[#E6B325] data-[state=active]:text-white">Student</TabsTrigger>
-                  <TabsTrigger value="instructor" className="data-[state=active]:bg-[#E6B325] data-[state=active]:text-white">Instructor</TabsTrigger>
+                <TabsList className="grid grid-cols-2 mb-4 bg-white">
+                  <TabsTrigger value="student" className="data-[state=active]:bg-[#0f3a2e] data-[state=active]:text-white">Student Signup</TabsTrigger>
+                  <TabsTrigger value="instructor" className="data-[state=active]:bg-[#0f3a2e] data-[state=active]:text-white">Teacher Signup</TabsTrigger>
                 </TabsList>
                 
                 <input type="hidden" name="userType" value={userType} />
                 
-                <TabsContent value="simple" className="mt-0">
-                  <p className="text-sm text-gray-600 mb-4">
-                    Create a standard account to access courses and services.
-                  </p>
-                </TabsContent>
-                
                 <TabsContent value="student" className="mt-0">
                   <p className="text-sm text-gray-600 mb-4">
-                    Create a student account to enroll in courses and access learning materials.
+                    Create a student account to enroll in Quran courses and access learning materials.
                   </p>
                 </TabsContent>
                 
                 <TabsContent value="instructor" className="mt-0">
                   <p className="text-sm text-gray-600 mb-4">
-                    Apply to become an instructor and teach courses. Your application will be reviewed by an admin.
+                    Apply to become a Quran teacher. Your application will be reviewed by an admin.
                   </p>
                 </TabsContent>
               </Tabs>

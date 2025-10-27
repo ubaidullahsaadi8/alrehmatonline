@@ -114,9 +114,9 @@ export default function ThreeStepsSection() {
           <div className="relative mt-8 lg:mt-0">
             <div className="relative rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 sm:border-6 md:border-8 border-white">
               <img
-                src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80"
+                src="https://images.pexels.com/photos/6209131/pexels-photo-6209131.jpeg?auto=compress&cs=tinysrgb&w=600"
                 alt="Student Learning Quran"
-                className="w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] object-cover"
+                className="w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] object-cover object-center"
               />
             </div>
           </div>

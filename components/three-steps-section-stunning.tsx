@@ -30,25 +30,26 @@ const steps = [
 ]
 
 export default function ThreeStepsSectionStunning() {
-  const [scrollY, setScrollY] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY)
+      if (hasAnimated) return
       
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect()
         const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0
-        setIsVisible(isInView)
+        if (isInView) {
+          setHasAnimated(true)
+        }
       }
     }
 
     window.addEventListener("scroll", handleScroll)
     handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [hasAnimated])
 
   return (
     <section
@@ -121,7 +122,7 @@ export default function ThreeStepsSectionStunning() {
           {/* Arabic Heading */}
           <h2
             className={`mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0f3a2e] text-shadow-3d ${
-              isVisible ? 'animate-fade-in-scale' : 'opacity-0'
+              hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'
             }`}
             style={{ fontFamily: "'Amiri', serif", animationDelay: "0.2s" }}
             dir="rtl"
@@ -131,7 +132,7 @@ export default function ThreeStepsSectionStunning() {
 
           {/* English Heading */}
           <h3 className={`mb-4 sm:mb-5 md:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 ${
-            isVisible ? 'animate-fade-in-scale' : 'opacity-0'
+            hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'
           }`} style={{ animationDelay: "0.4s" }}>
             Start Learning Quran Today in{" "}
             <span className="relative inline-block">
@@ -144,7 +145,7 @@ export default function ThreeStepsSectionStunning() {
 
           {/* Description */}
           <p className={`max-w-3xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-gray-600 px-4 ${
-            isVisible ? 'animate-fade-in-scale' : 'opacity-0'
+            hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'
           }`} style={{ animationDelay: "0.6s" }}>
             Begin your journey to mastering the Quran with our simple and effective three-step process
           </p>
@@ -158,7 +159,7 @@ export default function ThreeStepsSectionStunning() {
               <div
                 key={index}
                 className={`group relative bg-white rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-xl hover:shadow-2xl hover:shadow-[#E6B325]/30 transition-all duration-700 border-4 border-white hover:border-[#E6B325]/40 transform hover:scale-105 hover:-translate-y-4 ${
-                  isVisible ? 'animate-slide-up-fade' : 'opacity-0'
+                  hasAnimated ? 'animate-slide-up-fade' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${0.8 + index * 0.2}s` }}
               >
@@ -213,7 +214,7 @@ export default function ThreeStepsSectionStunning() {
         </div>
 
         {/* CTA Section */}
-        <div className={`text-center ${isVisible ? 'animate-fade-in-scale' : 'opacity-0'}`} style={{ animationDelay: "1.6s" }}>
+        <div className={`text-center ${hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'}`} style={{ animationDelay: "1.6s" }}>
           <Link href="/signup">
             <Button className="group relative overflow-hidden px-10 sm:px-12 md:px-16 py-6 sm:py-7 md:py-8 text-base sm:text-lg md:text-xl font-black bg-gradient-to-r from-[#0f3a2e] via-[#1a4d3c] to-[#0f3a2e] hover:from-[#1a4d3c] hover:via-[#0f3a2e] hover:to-[#1a4d3c] text-white transition-all duration-700 rounded-full shadow-2xl hover:shadow-[0_20px_60px_rgba(15,58,46,0.5)] transform hover:scale-110 hover:-translate-y-2 uppercase tracking-widest bg-size-200 animate-gradient-flow-slow">
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />

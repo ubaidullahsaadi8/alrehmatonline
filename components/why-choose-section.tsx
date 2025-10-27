@@ -51,9 +51,9 @@ export default function WhyChooseSection() {
           <div className="relative order-2 lg:order-1 shadow-2xl mt-8 lg:mt-0">
             <div className="relative rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80"
-                alt="Happy Student"
-                className="w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[550px] object-cover"
+                src="https://images.pexels.com/photos/8923988/pexels-photo-8923988.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Children Learning Quran"
+                className="w-full h-[300px] sm:h-[350px] md:h-[450px] lg:h-[550px] object-cover object-center"
               />
             </div>
           </div>

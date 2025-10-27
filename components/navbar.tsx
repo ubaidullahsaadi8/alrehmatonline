@@ -188,11 +188,18 @@ export default function Navbar() {
                 </SimpleDropdown>
               </>
             ) : (
-              <Link href="/login">
-                <Button className="bg-[#DFB12C] hover:bg-[#D6A219] text-white px-6 py-2 rounded-full font-bold text-sm transition-all duration-300">
-                  LOGIN
-                </Button>
-              </Link>
+              <div className="flex items-center gap-3">
+                <Link href="/signup">
+                  <Button className="bg-[#0f3a2e] hover:bg-[#1a4d3c] text-white px-6 py-2 rounded-full font-bold text-sm transition-all duration-300">
+                    SIGN UP
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button className="bg-[#DFB12C] hover:bg-[#D6A219] text-white px-6 py-2 rounded-full font-bold text-sm transition-all duration-300">
+                    LOGIN
+                  </Button>
+                </Link>
+              </div>
             )}
           </div>
 
@@ -284,9 +291,14 @@ export default function Navbar() {
         </div>
       </>
     ) : (
-      <div className="border-t border-black/10 pt-4 mt-4">
+      <div className="border-t border-black/10 pt-4 mt-4 space-y-2">
+        <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+          <Button className="w-full bg-[#0F3B2E] hover:bg-[#1a4d3c] text-white rounded-full py-2 font-bold">
+            SIGN UP
+          </Button>
+        </Link>
         <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-          <Button className="w-full bg-[#0F3B2E] hover:bg-[#0f3b2e] text-white rounded-full py-2 font-bold">
+          <Button className="w-full bg-[#DFB12C] hover:bg-[#D6A219] text-white rounded-full py-2 font-bold">
             LOGIN
           </Button>
         </Link>

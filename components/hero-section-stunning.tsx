@@ -7,19 +7,19 @@ import { useState, useEffect, useRef } from "react";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&q=80",
+    image: "https://images.pexels.com/photos/8923965/pexels-photo-8923965.jpeg?auto=compress&cs=tinysrgb&w=600",
     arabicQuote: "طَلَبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ",
     englishQuote: "Seek knowledge from the cradle to the grave.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
   },
   {
-    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80",
+    image: "https://images.pexels.com/photos/6209131/pexels-photo-6209131.jpeg?auto=compress&cs=tinysrgb&w=600",
     arabicQuote: "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
     englishQuote: "Read in the name of your Lord who created.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
   },
   {
-    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80",
+    image: "https://images.pexels.com/photos/8923988/pexels-photo-8923988.jpeg?auto=compress&cs=tinysrgb&w=600",
     arabicQuote: "رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا",
     englishQuote: "My Lord, increase me in knowledge and understanding.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
@@ -28,7 +28,6 @@ const slides = [
 
 export default function HeroSectionStunning() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,18 +37,10 @@ export default function HeroSectionStunning() {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
-  const parallaxOffset = scrollY * 0.5;
 
   return (
     <div ref={sectionRef} className="relative min-h-[700px] sm:min-h-[750px] md:min-h-[800px] lg:min-h-[850px] bg-white overflow-hidden">
@@ -95,10 +86,9 @@ export default function HeroSectionStunning() {
         <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-2xl animate-pulse-slower" />
       </div>
 
-      {/* White Background Shape with parallax */}
+      {/* White Background Shape */}
       <div 
         className="absolute right-0 top-0 bottom-0 w-[50%] bg-gradient-to-br from-gray-50 to-white"
-        style={{ transform: `translateY(${parallaxOffset * 0.3}px)` }}
       >
         <div className="absolute inset-0 opacity-[0.03]">
           <svg width="100%" height="100%">
@@ -135,7 +125,6 @@ export default function HeroSectionStunning() {
                     index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-95 absolute inset-0"
                   }`}
                   style={{
-                    transform: index === currentSlide ? `translateZ(${scrollY * 0.1}px) rotateY(${scrollY * 0.05}deg)` : undefined,
                     transformStyle: "preserve-3d",
                   }}
                 >
@@ -144,8 +133,8 @@ export default function HeroSectionStunning() {
                     <div className="absolute inset-0 bg-gradient-to-tr from-[#E6B325]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                     <img
                       src={slide.image}
-                      alt="Quran Learning"
-                      className="w-full h-[240px] sm:h-[280px] md:h-[350px] lg:h-[450px] object-cover transition-all duration-700 group-hover:scale-110"
+                      alt="Children Learning Quran"
+                      className="w-full h-[240px] sm:h-[280px] md:h-[350px] lg:h-[450px] object-cover object-center transition-all duration-700 group-hover:scale-110"
                     />
                     {/* Sparkle effect */}
                     <Sparkles className="absolute top-4 right-4 w-6 h-6 text-[#E6B325] animate-pulse z-20" />
@@ -155,9 +144,9 @@ export default function HeroSectionStunning() {
                   <div className="absolute bottom-[-30px] sm:bottom-[-35px] md:bottom-[-20px] left-0 md:left-[-20px] w-[55%] sm:w-[52%] md:w-[50%] lg:w-[45%] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden shadow-2xl border-4 sm:border-6 md:border-8 border-white z-20 animate-float-slow group hover:shadow-[#0f3a2e]/50 transition-all duration-500">
                     <div className="absolute inset-0 bg-gradient-to-br from-[#0f3a2e]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                     <img
-                      src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=80"
-                      alt="Student Learning"
-                      className="w-full h-[160px] sm:h-[190px] md:h-[270px] lg:h-[310px] object-cover transition-all duration-700 group-hover:scale-110"
+                      src="https://images.pexels.com/photos/6209237/pexels-photo-6209237.jpeg?auto=compress&cs=tinysrgb&w=400"
+                      alt="Child Reading Quran"
+                      className="w-full h-[160px] sm:h-[190px] md:h-[270px] lg:h-[310px] object-cover object-center transition-all duration-700 group-hover:scale-110"
                     />
                   </div>
                 </div>

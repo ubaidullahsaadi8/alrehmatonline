@@ -33,25 +33,26 @@ const benefits = [
 ]
 
 export default function WhyChooseSectionStunning() {
-  const [scrollY, setScrollY] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY)
+      if (hasAnimated) return
       
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect()
         const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0
-        setIsVisible(isInView)
+        if (isInView) {
+          setHasAnimated(true)
+        }
       }
     }
 
     window.addEventListener("scroll", handleScroll)
     handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [hasAnimated])
 
   return (
     <section
@@ -126,7 +127,7 @@ export default function WhyChooseSectionStunning() {
           <div className="order-2 md:order-1">
             {/* Badge */}
             <div className={`flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 mb-5 sm:mb-6 rounded-full bg-gradient-to-r from-[#E6B325]/30 via-[#D4A017]/20 to-[#E6B325]/30 border-2 border-[#E6B325]/50 w-max backdrop-blur-md shadow-xl shadow-[#E6B325]/30 ${
-              isVisible ? 'animate-glow-pulse' : 'opacity-0'
+              hasAnimated ? 'animate-glow-pulse' : 'opacity-0'
             }`}>
               <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-[#E6B325] animate-bounce-subtle" />
               <span className="text-xs sm:text-sm md:text-base font-black text-[#0f3a2e] uppercase tracking-widest">
@@ -138,7 +139,7 @@ export default function WhyChooseSectionStunning() {
             {/* Arabic Heading */}
             <h2
               className={`mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0f3a2e] text-shadow-3d ${
-                isVisible ? 'animate-fade-in-scale' : 'opacity-0'
+                hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'
               }`}
               style={{ fontFamily: "'Amiri', serif", animationDelay: "0.2s" }}
               dir="rtl"
@@ -148,7 +149,7 @@ export default function WhyChooseSectionStunning() {
 
             {/* English Heading */}
             <h3 className={`mb-4 sm:mb-5 md:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 leading-tight ${
-              isVisible ? 'animate-fade-in-scale' : 'opacity-0'
+              hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'
             }`} style={{ animationDelay: "0.4s" }}>
               Learn Qura'an{" "}
               <span className="relative inline-block">
@@ -161,7 +162,7 @@ export default function WhyChooseSectionStunning() {
 
             {/* Description */}
             <p className={`text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed mb-6 sm:mb-8 md:mb-10 ${
-              isVisible ? 'animate-fade-in-scale' : 'opacity-0'
+              hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'
             }`} style={{ animationDelay: "0.6s" }}>
               Experience the best Quran learning platform with certified teachers, personalized attention, and proven teaching methods.
             </p>
@@ -172,7 +173,7 @@ export default function WhyChooseSectionStunning() {
                 <li
                   key={index}
                   className={`group flex items-start gap-3 sm:gap-4 ${
-                    isVisible ? 'animate-slide-up-fade' : 'opacity-0'
+                    hasAnimated ? 'animate-slide-up-fade' : 'opacity-0'
                   }`}
                   style={{ animationDelay: `${0.8 + index * 0.1}s` }}
                 >
@@ -199,7 +200,7 @@ export default function WhyChooseSectionStunning() {
 
             {/* CTA Buttons */}
             <div className={`flex flex-col sm:flex-row gap-4 sm:gap-5 ${
-              isVisible ? 'animate-fade-in-scale' : 'opacity-0'
+              hasAnimated ? 'animate-fade-in-scale' : 'opacity-0'
             }`} style={{ animationDelay: "1.4s" }}>
               <Link href="/signup" className="flex-1 sm:flex-initial">
                 <Button className="w-full group relative overflow-hidden px-8 sm:px-10 md:px-12 py-5 sm:py-6 md:py-7 text-sm sm:text-base md:text-lg font-black bg-gradient-to-r from-[#0f3a2e] via-[#1a4d3c] to-[#0f3a2e] hover:from-[#1a4d3c] hover:via-[#0f3a2e] hover:to-[#1a4d3c] text-white transition-all duration-700 rounded-full shadow-2xl hover:shadow-[0_20px_60px_rgba(15,58,46,0.5)] transform hover:scale-110 hover:-translate-y-2 uppercase tracking-wider bg-size-200 animate-gradient-flow-slow">
@@ -224,16 +225,16 @@ export default function WhyChooseSectionStunning() {
 
           {/* RIGHT SIDE - Image with 3D effects */}
           <div className={`order-1 md:order-2 relative perspective-1000 ${
-            isVisible ? 'animate-slide-up-fade' : 'opacity-0'
+            hasAnimated ? 'animate-slide-up-fade' : 'opacity-0'
           }`} style={{ animationDelay: "0.8s" }}>
             <div className="relative group">
               {/* Main Image Container */}
               <div className="relative rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-6 sm:border-8 border-white group-hover:shadow-[0_30px_80px_rgba(230,179,37,0.4)] transition-all duration-700 transform group-hover:scale-105 group-hover:-rotate-2">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#E6B325]/20 via-transparent to-[#0f3a2e]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
                 <img
-                  src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&q=80"
-                  alt="Quran Learning"
-                  className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] object-cover group-hover:scale-110 transition-transform duration-1000"
+                  src="https://images.pexels.com/photos/8923965/pexels-photo-8923965.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="Children Learning Quran"
+                  className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[550px] object-cover object-center group-hover:scale-110 transition-transform duration-1000"
                 />
                 {/* Sparkle Effects */}
                 <Sparkles className="absolute top-6 right-6 w-8 h-8 text-[#E6B325] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse z-20" />

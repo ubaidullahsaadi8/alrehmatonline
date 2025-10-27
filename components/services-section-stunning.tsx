@@ -20,8 +20,7 @@ interface Service {
 export default function ServicesSectionStunning() {
   const [services, setServices] = useState<Service[]>([])
   const [loading, setLoading] = useState(true)
-  const [scrollY, setScrollY] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -41,19 +40,21 @@ export default function ServicesSectionStunning() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY)
+      if (hasAnimated) return
       
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect()
         const isInView = rect.top < window.innerHeight && rect.bottom > 0
-        setIsVisible(isInView)
+        if (isInView) {
+          setHasAnimated(true)
+        }
       }
     }
 
     window.addEventListener("scroll", handleScroll)
     handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [hasAnimated])
 
   return (
     <section
@@ -189,7 +190,7 @@ export default function ServicesSectionStunning() {
                 <div
                   key={service.id}
                   className={`group relative bg-white rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_60px_rgba(230,179,37,0.3)] transition-all duration-700 border-4 border-white hover:border-[#E6B325]/50 flex flex-col h-full transform hover:scale-105 hover:-translate-y-4 perspective-1000 ${
-                    isVisible ? 'animate-slide-up-fade' : 'opacity-0'
+                    hasAnimated ? 'animate-slide-up-fade' : 'opacity-0'
                   }`}
                   style={{
                     animationDelay: `${index * 0.15}s`,

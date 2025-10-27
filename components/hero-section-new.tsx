@@ -8,21 +8,21 @@ import { useState, useEffect } from "react";
 const slides = [
   {
     image:
-      "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&q=80",
+      "https://images.pexels.com/photos/8923965/pexels-photo-8923965.jpeg?auto=compress&cs=tinysrgb&w=600",
     arabicQuote: "طَلَبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ",
     englishQuote: "Seek knowledge from the cradle to the grave.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80",
+      "https://images.pexels.com/photos/6209131/pexels-photo-6209131.jpeg?auto=compress&cs=tinysrgb&w=600",
     arabicQuote: "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
     englishQuote: "Read in the name of your Lord who created.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80",
+      "https://images.pexels.com/photos/8923988/pexels-photo-8923988.jpeg?auto=compress&cs=tinysrgb&w=600",
     arabicQuote: "رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا",
     englishQuote: "My Lord, increase me in knowledge and understanding.",
     hadith: "قَالَ النَّبِيُّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
@@ -134,9 +134,9 @@ export default function HeroSectionNew() {
                   {/* Small Overlapping Image - Bottom Left */}
                   <div className="absolute bottom-[-30px] sm:bottom-[-35px] md:bottom-[-20px] left-0 md:left-[-20px] w-[55%] sm:w-[52%] md:w-[50%] lg:w-[45%] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden shadow-2xl border-4 sm:border-6 md:border-8 border-white z-20">
                     <img
-                      src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=80"
-                      alt="Student Learning"
-                      className="w-full h-[160px] sm:h-[190px] md:h-[270px] lg:h-[310px] object-cover transition-all duration-300"
+                      src="https://images.pexels.com/photos/6209237/pexels-photo-6209237.jpeg?auto=compress&cs=tinysrgb&w=400"
+                      alt="Child Reading Quran"
+                      className="w-full h-[160px] sm:h-[190px] md:h-[270px] lg:h-[310px] object-cover object-center transition-all duration-300"
                     />
                   </div>
                 </div>
@@ -229,7 +229,7 @@ export default function HeroSectionNew() {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
+                className={`object-cover object-center w-full h-full transition-all duration-300 ${
                   index === currentSlide ? "w-6 sm:w-8 bg-[#E6B325]" : "w-1.5 sm:w-2 bg-gray-400"
                 }`}
               />
