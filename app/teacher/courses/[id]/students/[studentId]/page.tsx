@@ -603,555 +603,7 @@ export default function StudentDetailPage() {
           </div>
 
           {/* Fee Management */}
-          <div className="lg:col-span-2">
-            <Card className="bg-[#1a1a1a] border-gray-800">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between text-white">
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-5 h-5 text-green-400" />
-                    Fee Management
-                  </div>
-                  {!student.fee_plan ? (
-                    <Button onClick={() => setEditingFee(true)} className="bg-green-600 hover:bg-green-700 cursor-pointer">
-                      <Plus className="w-4 h-4 mr-2" />
-                      Create Fee Plan
-                    </Button>
-                  ) : (
-                    <Button onClick={handleEditFeePlan} variant="outline" className="text-gray-300 border-gray-600 cursor-pointer">
-                      <Edit className="w-4 h-4 mr-2" />
-                      Edit Fee Plan
-                    </Button>
-                  )}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {editingFee ? (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label className="text-gray-300">Fee Type</Label>
-                        <Select 
-                          value={feeForm.fee_type} 
-                          onValueChange={(value: 'monthly' | 'full_course') => {
-                            // Show warning if selecting same fee type as existing
-                            if (student?.fee_plan && originalFeeType && value === originalFeeType) {
-                              const feeTypeName = value === 'monthly' ? 'Monthly Fee' : 'Complete Fee'
-                              const confirmed = window.confirm(
-                                `⚠️ Warning: You are selecting the same ${feeTypeName} plan type.\n\n` +
-                                `When you save, this will reset all previous data:\n` +
-                                `• All old installments will be deleted\n` +
-                                `• All monthly fee records will be deleted\n` +
-                                `• Paid amount will be reset to 0\n\n` +
-                                `Do you want to continue?`
-                              )
-                              if (!confirmed) return
-                            }
-                            setFeeForm(prev => ({ ...prev, fee_type: value }))
-                          }}
-                        >
-                          <SelectTrigger className="bg-[#2a2a2a] border-gray-600 text-white">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="monthly">Monthly Fee</SelectItem>
-                            <SelectItem value="full_course">Full Course Payment</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <Label className="text-gray-300">Currency (Student's Currency)</Label>
-                        <Input
-                          type="text"
-                          value={feeForm.currency}
-                          readOnly
-                          disabled
-                          className="bg-[#1a1a1a] border-gray-600 text-gray-400 cursor-not-allowed"
-                        />
-                        <p className="text-xs text-gray-500 mt-1">Currency is based on student profile</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <Label className="text-gray-300">Payment Instructions</Label>
-                        <Textarea
-                          value={feeForm.payment_instructions}
-                          onChange={(e) => setFeeForm(prev => ({ ...prev, payment_instructions: e.target.value }))}
-                          className="bg-[#2a2a2a] border-gray-600 text-white"
-                          placeholder="Enter payment instructions for the student..."
-                          rows={3}
-                        />
-                      </div>
-                    </div>
-
-                    {feeForm.fee_type === 'monthly' ? (
-                      // Monthly fee: No amount field needed
-                      <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-                        <p className="text-sm text-blue-300">
-                          <span className="font-semibold">Monthly Fee Plan Selected:</span> You can add individual monthly fee records after saving this plan.
-                        </p>
-                      </div>
-                    ) : (
-                      <div className="grid grid-cols-3 gap-4">
-                        <div>
-                          <Label className="text-gray-300">Total Amount</Label>
-                          <Input
-                            type="number"
-                            step="0.01"
-                            value={feeForm.total_amount}
-                            onChange={(e) => setFeeForm(prev => ({ ...prev, total_amount: e.target.value }))}
-                            className="bg-[#2a2a2a] border-gray-600 text-white"
-                            placeholder="0.00"
-                          />
-                        </div>
-                        <div>
-                          <Label className="text-gray-300">Number of Installments</Label>
-                          <Input
-                            type="number"
-                            min="1"
-                            value={feeForm.installments_count}
-                            onChange={(e) => handleInstallmentsCountChange(e.target.value)}
-                            className="bg-[#2a2a2a] border-gray-600 text-white"
-                          />
-                        </div>
-                        <div>
-                          <Label className="text-gray-300">Auto-calculated (Equal Split)</Label>
-                          <Input
-                            type="number"
-                            step="0.01"
-                            value={
-                              feeForm.total_amount && feeForm.installments_count 
-                                ? (parseFloat(feeForm.total_amount) / parseInt(feeForm.installments_count)).toFixed(2)
-                                : ''
-                            }
-                            readOnly
-                            className="bg-[#2a2a2a] border-gray-600 text-gray-400"
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Custom Installments List */}
-                    {feeForm.fee_type === 'full_course' && customInstallments.length > 0 && (
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <h3 className="font-semibold text-white">Customize Installments</h3>
-                          <Badge className="text-blue-300 bg-blue-500/20">
-                            Total: {feeForm.currency} {customInstallments.reduce((sum, inst) => sum + (parseFloat(inst.amount) || 0), 0).toFixed(2)} / {feeForm.total_amount}
-                          </Badge>
-                        </div>
-
-                        {installmentError && (
-                          <div className="p-3 rounded-lg bg-red-500/20 border border-red-500/50">
-                            <p className="text-sm text-red-400 flex items-center gap-2">
-                              <AlertTriangle className="w-4 h-4" />
-                              {installmentError}
-                            </p>
-                          </div>
-                        )}
-
-                        <div className="space-y-3">
-                          {customInstallments.map((installment, index) => (
-                            <div 
-                              key={index}
-                              className="p-4 bg-[#2a2a2a] rounded-lg space-y-3"
-                            >
-                              <div className="flex items-center gap-2 mb-2">
-                                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20">
-                                  <span className="text-sm font-bold text-blue-400">#{installment.installment_number}</span>
-                                </div>
-                                <span className="font-medium text-white">Installment {installment.installment_number}</span>
-                              </div>
-
-                              <div className="grid grid-cols-2 gap-3">
-                                <div>
-                                  <Label className="text-sm text-gray-400">Amount ({feeForm.currency})</Label>
-                                  <Input
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    value={installment.amount}
-                                    onChange={(e) => updateInstallment(index, 'amount', e.target.value)}
-                                    className="bg-[#1a1a1a] border-gray-600 text-white mt-1"
-                                    placeholder="0.00"
-                                  />
-                                </div>
-                                <div>
-                                  <Label className="text-sm text-gray-400">Due Date</Label>
-                                  <Input
-                                    type="date"
-                                    value={installment.due_date}
-                                    onChange={(e) => updateInstallment(index, 'due_date', e.target.value)}
-                                    className="bg-[#1a1a1a] border-gray-600 text-white mt-1"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="flex gap-2">
-                      <Button 
-                        onClick={handleSaveFeePlan} 
-                        disabled={savingFee}
-                        className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        {savingFee ? (
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        ) : (
-                          <Save className="w-4 h-4 mr-2" />
-                        )}
-                        {savingFee ? 'Saving...' : 'Save Fee Plan'}
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        onClick={() => setEditingFee(false)}
-                        className="text-gray-300 border-gray-600"
-                      >
-                        <X className="w-4 h-4 mr-2" />
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-6">
-                    {student.fee_plan ? (
-                      <>
-                        {/* Fee Plan Overview - Without Status */}
-                        <div className="p-4 bg-[#2a2a2a] rounded-lg">
-                          <div className="mb-4">
-                            <h3 className="font-semibold text-white">Fee Plan Details</h3>
-                          </div>
-                          
-                          <div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-3">
-                            <div>
-                              <span className="text-gray-400">Fee Type:</span>
-                              <div className="font-medium text-white">
-                                {student.fee_plan.fee_type === 'monthly' ? 'Monthly Fee' : 'Full Course Payment'}
-                              </div>
-                            </div>
-                            
-                            {/* Total Amount - Only show for Full Course Payment */}
-                            {student.fee_plan.fee_type !== 'monthly' && (
-                              <div>
-                                <span className="text-gray-400">Total Amount:</span>
-                                <div className="text-lg font-bold text-green-400">
-                                  {student.fee_plan.currency} {student.fee_plan.total_amount.toLocaleString()}
-                                </div>
-                              </div>
-                            )}
-                            
-                            {(student.fee_plan.fee_type === 'full_course' || student.fee_plan.fee_type === 'complete') && (
-                              <>
-                                <div>
-                                  <span className="text-gray-400">Installments:</span>
-                                  <div className="text-lg font-bold text-blue-400">
-                                    {student.fee_plan.installments_count}
-                                  </div>
-                                </div>
-                                <div>
-                                  <span className="text-gray-400">Per Installment:</span>
-                                  <div className="text-lg font-bold text-yellow-400">
-                                    {student.fee_plan.currency} {(student.fee_plan.installment_amount || 0).toLocaleString()}
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                            
-                            <div>
-                              <span className="text-gray-400">Created:</span>
-                              <div className="font-medium text-white">
-                                {new Date(student.fee_plan.created_at).toLocaleDateString()}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Installment Schedule - Only for Full Course */}
-                        {student.fee_plan.fee_type === 'complete' && student.fee_plan.installment_schedule && student.fee_plan.installment_schedule.length > 0 && (
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between">
-                              <h3 className="font-semibold text-white">Installment Schedule</h3>
-                              <Badge className="text-blue-300 bg-blue-500/20">
-                                {student.fee_plan.installment_schedule.filter(i => i.status === 'paid').length} / {student.fee_plan.installment_schedule.length} Paid
-                              </Badge>
-                            </div>
-                            
-                            <div className="space-y-2">
-                              {student.fee_plan.installment_schedule.map((installment) => (
-                                <div 
-                                  key={installment.id} 
-                                  className="flex items-center justify-between p-4 bg-[#2a2a2a] rounded-lg hover:bg-[#333333] transition-colors"
-                                >
-                                  <div className="flex items-center gap-4">
-                                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/20">
-                                      <span className="font-bold text-blue-400">#{installment.installment_number}</span>
-                                    </div>
-                                    <div>
-                                      <div className="font-medium text-white">
-                                        {student.fee_plan.currency} {Number(installment.amount).toLocaleString()}
-                                      </div>
-                                      <div className="text-sm text-gray-400">
-                                        Due: {new Date(installment.due_date).toLocaleDateString()}
-                                      </div>
-                                      {installment.paid_date && (
-                                        <div className="text-xs text-green-400">
-                                          Paid: {new Date(installment.paid_date).toLocaleDateString()}
-                                        </div>
-                                      )}
-                                    </div>
-                                  </div>
-                                  
-                                  <div className="flex items-center gap-3">
-                                    <Badge className={getStatusColor(installment.status)}>
-                                      {installment.status}
-                                    </Badge>
-                                    
-                                    {installment.status === 'pending' && (
-                                      <Button
-                                        size="sm"
-                                        onClick={() => updateInstallmentStatus(installment.id, 'paid')}
-                                        disabled={updatingInstallment === installment.id}
-                                        className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                                      >
-                                        {updatingInstallment === installment.id ? (
-                                          <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                                        ) : (
-                                          <CheckCircle className="w-3 h-3 mr-1" />
-                                        )}
-                                        {updatingInstallment === installment.id ? 'Updating...' : 'Mark Paid'}
-                                      </Button>
-                                    )}
-                                    
-                                    {installment.status === 'paid' && (
-                                      <Button
-                                        size="sm"
-                                        variant="outline"
-                                        onClick={() => updateInstallmentStatus(installment.id, 'pending')}
-                                        disabled={updatingInstallment === installment.id}
-                                        className="text-gray-400 border-gray-600 hover:bg-gray-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                                      >
-                                        {updatingInstallment === installment.id ? (
-                                          <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                                        ) : null}
-                                        {updatingInstallment === installment.id ? 'Updating...' : 'Unpay'}
-                                      </Button>
-                                    )}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Monthly Fee Management - Only for Monthly Fee Type */}
-                        {student.fee_plan.fee_type === 'monthly' && (
-                          <div className="space-y-4">
-                            <div className="flex items-center justify-between">
-                              <h3 className="font-semibold text-white">Monthly Fee Management</h3>
-                              <Button onClick={() => setShowAddMonthlyFee(true)} size="sm" className="bg-blue-600 hover:bg-blue-700">
-                                <Plus className="w-4 h-4 mr-2" />
-                                Add Monthly Fee
-                              </Button>
-                            </div>
-
-                            {showAddMonthlyFee && (
-                              <div className="p-4 bg-[#2a2a2a] rounded-lg">
-                                <h4 className="mb-4 font-medium text-white">Add Monthly Fee</h4>
-                                <div className="grid grid-cols-2 gap-4 mb-4">
-                                  <div>
-                                    <Label className="text-gray-300">Month</Label>
-                                    <Select 
-                                      value={monthlyFeeForm.month}
-                                      onValueChange={(value) => setMonthlyFeeForm(prev => ({ ...prev, month: value }))}
-                                    >
-                                      <SelectTrigger className="bg-[#1a1a1a] border-gray-600 text-white">
-                                        <SelectValue placeholder="Select Month" />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        {months.map((month, index) => (
-                                          <SelectItem key={index} value={month.toLowerCase()}>
-                                            {month}
-                                          </SelectItem>
-                                        ))}
-                                      </SelectContent>
-                                    </Select>
-                                  </div>
-                                  <div>
-                                    <Label className="text-gray-300">Year</Label>
-                                    <Select 
-                                      value={monthlyFeeForm.year}
-                                      onValueChange={(value) => setMonthlyFeeForm(prev => ({ ...prev, year: value }))}
-                                    >
-                                      <SelectTrigger className="bg-[#1a1a1a] border-gray-600 text-white">
-                                        <SelectValue />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        {[0, 1, 2].map(offset => {
-                                          const year = new Date().getFullYear() + offset
-                                          return <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
-                                        })}
-                                      </SelectContent>
-                                    </Select>
-                                  </div>
-                                </div>
-                                <div className="grid grid-cols-2 gap-4 mb-4">
-                                  <div>
-                                    <Label className="text-gray-300">Amount ({student.fee_plan.currency})</Label>
-                                    <Input
-                                      type="number"
-                                      step="0.01"
-                                      value={monthlyFeeForm.amount}
-                                      onChange={(e) => setMonthlyFeeForm(prev => ({ ...prev, amount: e.target.value }))}
-                                      className="bg-[#1a1a1a] border-gray-600 text-white"
-                                      placeholder="0.00"
-                                    />
-                                  </div>
-                                  <div>
-                                    <Label className="text-gray-300">Due Date</Label>
-                                    <Input
-                                      type="date"
-                                      value={monthlyFeeForm.due_date}
-                                      onChange={(e) => setMonthlyFeeForm(prev => ({ ...prev, due_date: e.target.value }))}
-                                      className="bg-[#1a1a1a] border-gray-600 text-white"
-                                      onFocus={(e) => {
-                               
-                                        if (monthlyFeeForm.month && monthlyFeeForm.year) {
-                                          const monthIndex = months.findIndex(m => m.toLowerCase() === monthlyFeeForm.month)
-                                          if (monthIndex !== -1) {
-                                            const defaultDate = new Date(parseInt(monthlyFeeForm.year), monthIndex, 1)
-                                            const formattedDate = defaultDate.toISOString().split('T')[0]
-                                          
-                                            if (!monthlyFeeForm.due_date) {
-                                              setMonthlyFeeForm(prev => ({ ...prev, due_date: formattedDate }))
-                                            }
-                                          }
-                                        }
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="flex gap-2">
-                                  <Button 
-                                    onClick={handleAddMonthlyFee} 
-                                    disabled={addingMonthlyFee}
-                                    size="sm" 
-                                    className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                                  >
-                                    {addingMonthlyFee ? (
-                                      <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                                    ) : (
-                                      <Plus className="w-3 h-3 mr-1" />
-                                    )}
-                                    {addingMonthlyFee ? 'Adding...' : 'Add'}
-                                  </Button>
-                                  <Button 
-                                    variant="outline" 
-                                    onClick={() => setShowAddMonthlyFee(false)}
-                                    size="sm"
-                                    className="text-gray-300 border-gray-600"
-                                  >
-                                    Cancel
-                                  </Button>
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Monthly Fees List */}
-                            <div className="space-y-3">
-                              {monthlyFees.length === 0 ? (
-                                <div className="p-4 text-center text-gray-500 bg-[#2a2a2a] rounded-lg">
-                                  No monthly fees added yet
-                                </div>
-                              ) : (
-                                monthlyFees.map((fee) => (
-                                  <div key={fee.id} className="p-4 bg-[#2a2a2a] rounded-lg hover:bg-[#333333] transition-colors">
-                                    <div className="flex items-center justify-between">
-                                      <div className="flex items-center gap-4">
-                                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20">
-                                          <Calendar className="w-5 h-5 text-blue-400" />
-                                        </div>
-                                        <div>
-                                          <div className="font-semibold text-white">
-                                            {fee.month} {fee.year}
-                                          </div>
-                                          <div className="font-medium text-green-400">
-                                            {student.fee_plan.currency} {Number(fee.amount).toLocaleString()}
-                                          </div>
-                                          <div className="text-sm text-gray-400">
-                                            Due: {new Date(fee.due_date).toLocaleDateString()}
-                                          </div>
-                                          {fee.paid_date && (
-                                            <div className="text-sm text-green-400">
-                                              Paid: {new Date(fee.paid_date).toLocaleDateString()}
-                                            </div>
-                                          )}
-                                        </div>
-                                      </div>
-                                      
-                                      <div className="flex items-center gap-2">
-                                        <Badge className={getStatusColor(fee.status)}>
-                                          {fee.status}
-                                        </Badge>
-                                        
-                                        {fee.status === 'pending' && (
-                                          <Button
-                                            size="sm"
-                                            onClick={() => updateMonthlyFeeStatus(fee.id, 'paid')}
-                                            disabled={updatingMonthlyFee === fee.id}
-                                            className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                                          >
-                                            {updatingMonthlyFee === fee.id ? (
-                                              <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                                            ) : (
-                                              <CheckCircle className="w-3 h-3 mr-1" />
-                                            )}
-                                            {updatingMonthlyFee === fee.id ? 'Updating...' : 'Mark Paid'}
-                                          </Button>
-                                        )}
-                                        
-                                        {fee.status === 'paid' && (
-                                          <Button
-                                            size="sm"
-                                            variant="outline"
-                                            onClick={() => updateMonthlyFeeStatus(fee.id, 'pending')}
-                                            disabled={updatingMonthlyFee === fee.id}
-                                            className="text-gray-400 border-gray-600 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                                          >
-                                            {updatingMonthlyFee === fee.id ? (
-                                              <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                                            ) : null}
-                                            {updatingMonthlyFee === fee.id ? 'Updating...' : 'Unpay'}
-                                          </Button>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))
-                              )}
-                            </div>
-                          </div>
-                        )}
-
-                      </>
-                    ) : (
-                      <div className="p-8 text-center text-gray-500">
-                        <DollarSign className="w-12 h-12 mx-auto mb-4 text-gray-600" />
-                        <h3 className="mb-2 text-lg font-medium text-gray-400">No Fee Plan Set</h3>
-                        <p className="mb-4">Create a fee plan to start managing payments for this student.</p>
-                        <Button onClick={() => setEditingFee(true)} className="bg-green-600 hover:bg-green-700">
-                          <Plus className="w-4 h-4 mr-2" />
-                          Create Fee Plan
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
+          
         </div>
       </div>
       
@@ -1159,3 +611,557 @@ export default function StudentDetailPage() {
     </div>
   )
 }
+
+
+
+
+
+// <div className="lg:col-span-2">
+//             <Card className="bg-[#1a1a1a] border-gray-800">
+//               <CardHeader>
+//                 <CardTitle className="flex items-center justify-between text-white">
+//                   <div className="flex items-center gap-2">
+//                     <DollarSign className="w-5 h-5 text-green-400" />
+//                     Fee Management
+//                   </div>
+//                   {!student.fee_plan ? (
+//                     <Button onClick={() => setEditingFee(true)} className="bg-green-600 hover:bg-green-700 cursor-pointer">
+//                       <Plus className="w-4 h-4 mr-2" />
+//                       Create Fee Plan
+//                     </Button>
+//                   ) : (
+//                     <Button onClick={handleEditFeePlan} variant="outline" className="text-gray-300 border-gray-600 cursor-pointer">
+//                       <Edit className="w-4 h-4 mr-2" />
+//                       Edit Fee Plan
+//                     </Button>
+//                   )}
+//                 </CardTitle>
+//               </CardHeader>
+//               <CardContent>
+//                 {editingFee ? (
+//                   <div className="space-y-6">
+//                     <div className="grid grid-cols-2 gap-4">
+//                       <div>
+//                         <Label className="text-gray-300">Fee Type</Label>
+//                         <Select 
+//                           value={feeForm.fee_type} 
+//                           onValueChange={(value: 'monthly' | 'full_course') => {
+//                             // Show warning if selecting same fee type as existing
+//                             if (student?.fee_plan && originalFeeType && value === originalFeeType) {
+//                               const feeTypeName = value === 'monthly' ? 'Monthly Fee' : 'Complete Fee'
+//                               const confirmed = window.confirm(
+//                                 `⚠️ Warning: You are selecting the same ${feeTypeName} plan type.\n\n` +
+//                                 `When you save, this will reset all previous data:\n` +
+//                                 `• All old installments will be deleted\n` +
+//                                 `• All monthly fee records will be deleted\n` +
+//                                 `• Paid amount will be reset to 0\n\n` +
+//                                 `Do you want to continue?`
+//                               )
+//                               if (!confirmed) return
+//                             }
+//                             setFeeForm(prev => ({ ...prev, fee_type: value }))
+//                           }}
+//                         >
+//                           <SelectTrigger className="bg-[#2a2a2a] border-gray-600 text-white">
+//                             <SelectValue />
+//                           </SelectTrigger>
+//                           <SelectContent>
+//                             <SelectItem value="monthly">Monthly Fee</SelectItem>
+//                             <SelectItem value="full_course">Full Course Payment</SelectItem>
+//                           </SelectContent>
+//                         </Select>
+//                       </div>
+//                       <div>
+//                         <Label className="text-gray-300">Currency (Student's Currency)</Label>
+//                         <Input
+//                           type="text"
+//                           value={feeForm.currency}
+//                           readOnly
+//                           disabled
+//                           className="bg-[#1a1a1a] border-gray-600 text-gray-400 cursor-not-allowed"
+//                         />
+//                         <p className="text-xs text-gray-500 mt-1">Currency is based on student profile</p>
+//                       </div>
+//                     </div>
+
+//                     <div className="space-y-4">
+//                       <div>
+//                         <Label className="text-gray-300">Payment Instructions</Label>
+//                         <Textarea
+//                           value={feeForm.payment_instructions}
+//                           onChange={(e) => setFeeForm(prev => ({ ...prev, payment_instructions: e.target.value }))}
+//                           className="bg-[#2a2a2a] border-gray-600 text-white"
+//                           placeholder="Enter payment instructions for the student..."
+//                           rows={3}
+//                         />
+//                       </div>
+//                     </div>
+
+//                     {feeForm.fee_type === 'monthly' ? (
+//                       // Monthly fee: No amount field needed
+//                       <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+//                         <p className="text-sm text-blue-300">
+//                           <span className="font-semibold">Monthly Fee Plan Selected:</span> You can add individual monthly fee records after saving this plan.
+//                         </p>
+//                       </div>
+//                     ) : (
+//                       <div className="grid grid-cols-3 gap-4">
+//                         <div>
+//                           <Label className="text-gray-300">Total Amount</Label>
+//                           <Input
+//                             type="number"
+//                             step="0.01"
+//                             value={feeForm.total_amount}
+//                             onChange={(e) => setFeeForm(prev => ({ ...prev, total_amount: e.target.value }))}
+//                             className="bg-[#2a2a2a] border-gray-600 text-white"
+//                             placeholder="0.00"
+//                           />
+//                         </div>
+//                         <div>
+//                           <Label className="text-gray-300">Number of Installments</Label>
+//                           <Input
+//                             type="number"
+//                             min="1"
+//                             value={feeForm.installments_count}
+//                             onChange={(e) => handleInstallmentsCountChange(e.target.value)}
+//                             className="bg-[#2a2a2a] border-gray-600 text-white"
+//                           />
+//                         </div>
+//                         <div>
+//                           <Label className="text-gray-300">Auto-calculated (Equal Split)</Label>
+//                           <Input
+//                             type="number"
+//                             step="0.01"
+//                             value={
+//                               feeForm.total_amount && feeForm.installments_count 
+//                                 ? (parseFloat(feeForm.total_amount) / parseInt(feeForm.installments_count)).toFixed(2)
+//                                 : ''
+//                             }
+//                             readOnly
+//                             className="bg-[#2a2a2a] border-gray-600 text-gray-400"
+//                           />
+//                         </div>
+//                       </div>
+//                     )}
+
+//                     {/* Custom Installments List */}
+//                     {feeForm.fee_type === 'full_course' && customInstallments.length > 0 && (
+//                       <div className="space-y-4">
+//                         <div className="flex items-center justify-between">
+//                           <h3 className="font-semibold text-white">Customize Installments</h3>
+//                           <Badge className="text-blue-300 bg-blue-500/20">
+//                             Total: {feeForm.currency} {customInstallments.reduce((sum, inst) => sum + (parseFloat(inst.amount) || 0), 0).toFixed(2)} / {feeForm.total_amount}
+//                           </Badge>
+//                         </div>
+
+//                         {installmentError && (
+//                           <div className="p-3 rounded-lg bg-red-500/20 border border-red-500/50">
+//                             <p className="text-sm text-red-400 flex items-center gap-2">
+//                               <AlertTriangle className="w-4 h-4" />
+//                               {installmentError}
+//                             </p>
+//                           </div>
+//                         )}
+
+//                         <div className="space-y-3">
+//                           {customInstallments.map((installment, index) => (
+//                             <div 
+//                               key={index}
+//                               className="p-4 bg-[#2a2a2a] rounded-lg space-y-3"
+//                             >
+//                               <div className="flex items-center gap-2 mb-2">
+//                                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20">
+//                                   <span className="text-sm font-bold text-blue-400">#{installment.installment_number}</span>
+//                                 </div>
+//                                 <span className="font-medium text-white">Installment {installment.installment_number}</span>
+//                               </div>
+
+//                               <div className="grid grid-cols-2 gap-3">
+//                                 <div>
+//                                   <Label className="text-sm text-gray-400">Amount ({feeForm.currency})</Label>
+//                                   <Input
+//                                     type="number"
+//                                     step="0.01"
+//                                     min="0"
+//                                     value={installment.amount}
+//                                     onChange={(e) => updateInstallment(index, 'amount', e.target.value)}
+//                                     className="bg-[#1a1a1a] border-gray-600 text-white mt-1"
+//                                     placeholder="0.00"
+//                                   />
+//                                 </div>
+//                                 <div>
+//                                   <Label className="text-sm text-gray-400">Due Date</Label>
+//                                   <Input
+//                                     type="date"
+//                                     value={installment.due_date}
+//                                     onChange={(e) => updateInstallment(index, 'due_date', e.target.value)}
+//                                     className="bg-[#1a1a1a] border-gray-600 text-white mt-1"
+//                                   />
+//                                 </div>
+//                               </div>
+//                             </div>
+//                           ))}
+//                         </div>
+//                       </div>
+//                     )}
+
+//                     <div className="flex gap-2">
+//                       <Button 
+//                         onClick={handleSaveFeePlan} 
+//                         disabled={savingFee}
+//                         className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+//                       >
+//                         {savingFee ? (
+//                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+//                         ) : (
+//                           <Save className="w-4 h-4 mr-2" />
+//                         )}
+//                         {savingFee ? 'Saving...' : 'Save Fee Plan'}
+//                       </Button>
+//                       <Button 
+//                         variant="outline" 
+//                         onClick={() => setEditingFee(false)}
+//                         className="text-gray-300 border-gray-600"
+//                       >
+//                         <X className="w-4 h-4 mr-2" />
+//                         Cancel
+//                       </Button>
+//                     </div>
+//                   </div>
+//                 ) : (
+//                   <div className="space-y-6">
+//                     {student.fee_plan ? (
+//                       <>
+//                         {/* Fee Plan Overview - Without Status */}
+//                         <div className="p-4 bg-[#2a2a2a] rounded-lg">
+//                           <div className="mb-4">
+//                             <h3 className="font-semibold text-white">Fee Plan Details</h3>
+//                           </div>
+                          
+//                           <div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-3">
+//                             <div>
+//                               <span className="text-gray-400">Fee Type:</span>
+//                               <div className="font-medium text-white">
+//                                 {student.fee_plan.fee_type === 'monthly' ? 'Monthly Fee' : 'Full Course Payment'}
+//                               </div>
+//                             </div>
+                            
+//                             {/* Total Amount - Only show for Full Course Payment */}
+//                             {student.fee_plan.fee_type !== 'monthly' && (
+//                               <div>
+//                                 <span className="text-gray-400">Total Amount:</span>
+//                                 <div className="text-lg font-bold text-green-400">
+//                                   {student.fee_plan.currency} {student.fee_plan.total_amount.toLocaleString()}
+//                                 </div>
+//                               </div>
+//                             )}
+                            
+//                             {(student.fee_plan.fee_type === 'full_course' || student.fee_plan.fee_type === 'complete') && (
+//                               <>
+//                                 <div>
+//                                   <span className="text-gray-400">Installments:</span>
+//                                   <div className="text-lg font-bold text-blue-400">
+//                                     {student.fee_plan.installments_count}
+//                                   </div>
+//                                 </div>
+//                                 <div>
+//                                   <span className="text-gray-400">Per Installment:</span>
+//                                   <div className="text-lg font-bold text-yellow-400">
+//                                     {student.fee_plan.currency} {(student.fee_plan.installment_amount || 0).toLocaleString()}
+//                                   </div>
+//                                 </div>
+//                               </>
+//                             )}
+                            
+//                             <div>
+//                               <span className="text-gray-400">Created:</span>
+//                               <div className="font-medium text-white">
+//                                 {new Date(student.fee_plan.created_at).toLocaleDateString()}
+//                               </div>
+//                             </div>
+//                           </div>
+//                         </div>
+
+//                         {/* Installment Schedule - Only for Full Course */}
+//                         {student.fee_plan.fee_type === 'complete' && student.fee_plan.installment_schedule && student.fee_plan.installment_schedule.length > 0 && (
+//                           <div className="space-y-3">
+//                             <div className="flex items-center justify-between">
+//                               <h3 className="font-semibold text-white">Installment Schedule</h3>
+//                               <Badge className="text-blue-300 bg-blue-500/20">
+//                                 {student.fee_plan.installment_schedule.filter(i => i.status === 'paid').length} / {student.fee_plan.installment_schedule.length} Paid
+//                               </Badge>
+//                             </div>
+                            
+//                             <div className="space-y-2">
+//                               {student.fee_plan.installment_schedule.map((installment) => (
+//                                 <div 
+//                                   key={installment.id} 
+//                                   className="flex items-center justify-between p-4 bg-[#2a2a2a] rounded-lg hover:bg-[#333333] transition-colors"
+//                                 >
+//                                   <div className="flex items-center gap-4">
+//                                     <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/20">
+//                                       <span className="font-bold text-blue-400">#{installment.installment_number}</span>
+//                                     </div>
+//                                     <div>
+//                                       <div className="font-medium text-white">
+//                                         {student.fee_plan.currency} {Number(installment.amount).toLocaleString()}
+//                                       </div>
+//                                       <div className="text-sm text-gray-400">
+//                                         Due: {new Date(installment.due_date).toLocaleDateString()}
+//                                       </div>
+//                                       {installment.paid_date && (
+//                                         <div className="text-xs text-green-400">
+//                                           Paid: {new Date(installment.paid_date).toLocaleDateString()}
+//                                         </div>
+//                                       )}
+//                                     </div>
+//                                   </div>
+                                  
+//                                   <div className="flex items-center gap-3">
+//                                     <Badge className={getStatusColor(installment.status)}>
+//                                       {installment.status}
+//                                     </Badge>
+                                    
+//                                     {installment.status === 'pending' && (
+//                                       <Button
+//                                         size="sm"
+//                                         onClick={() => updateInstallmentStatus(installment.id, 'paid')}
+//                                         disabled={updatingInstallment === installment.id}
+//                                         className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+//                                       >
+//                                         {updatingInstallment === installment.id ? (
+//                                           <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+//                                         ) : (
+//                                           <CheckCircle className="w-3 h-3 mr-1" />
+//                                         )}
+//                                         {updatingInstallment === installment.id ? 'Updating...' : 'Mark Paid'}
+//                                       </Button>
+//                                     )}
+                                    
+//                                     {installment.status === 'paid' && (
+//                                       <Button
+//                                         size="sm"
+//                                         variant="outline"
+//                                         onClick={() => updateInstallmentStatus(installment.id, 'pending')}
+//                                         disabled={updatingInstallment === installment.id}
+//                                         className="text-gray-400 border-gray-600 hover:bg-gray-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+//                                       >
+//                                         {updatingInstallment === installment.id ? (
+//                                           <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+//                                         ) : null}
+//                                         {updatingInstallment === installment.id ? 'Updating...' : 'Unpay'}
+//                                       </Button>
+//                                     )}
+//                                   </div>
+//                                 </div>
+//                               ))}
+//                             </div>
+//                           </div>
+//                         )}
+
+//                         {/* Monthly Fee Management - Only for Monthly Fee Type */}
+//                         {student.fee_plan.fee_type === 'monthly' && (
+//                           <div className="space-y-4">
+//                             <div className="flex items-center justify-between">
+//                               <h3 className="font-semibold text-white">Monthly Fee Management</h3>
+//                               <Button onClick={() => setShowAddMonthlyFee(true)} size="sm" className="bg-blue-600 hover:bg-blue-700">
+//                                 <Plus className="w-4 h-4 mr-2" />
+//                                 Add Monthly Fee
+//                               </Button>
+//                             </div>
+
+//                             {showAddMonthlyFee && (
+//                               <div className="p-4 bg-[#2a2a2a] rounded-lg">
+//                                 <h4 className="mb-4 font-medium text-white">Add Monthly Fee</h4>
+//                                 <div className="grid grid-cols-2 gap-4 mb-4">
+//                                   <div>
+//                                     <Label className="text-gray-300">Month</Label>
+//                                     <Select 
+//                                       value={monthlyFeeForm.month}
+//                                       onValueChange={(value) => setMonthlyFeeForm(prev => ({ ...prev, month: value }))}
+//                                     >
+//                                       <SelectTrigger className="bg-[#1a1a1a] border-gray-600 text-white">
+//                                         <SelectValue placeholder="Select Month" />
+//                                       </SelectTrigger>
+//                                       <SelectContent>
+//                                         {months.map((month, index) => (
+//                                           <SelectItem key={index} value={month.toLowerCase()}>
+//                                             {month}
+//                                           </SelectItem>
+//                                         ))}
+//                                       </SelectContent>
+//                                     </Select>
+//                                   </div>
+//                                   <div>
+//                                     <Label className="text-gray-300">Year</Label>
+//                                     <Select 
+//                                       value={monthlyFeeForm.year}
+//                                       onValueChange={(value) => setMonthlyFeeForm(prev => ({ ...prev, year: value }))}
+//                                     >
+//                                       <SelectTrigger className="bg-[#1a1a1a] border-gray-600 text-white">
+//                                         <SelectValue />
+//                                       </SelectTrigger>
+//                                       <SelectContent>
+//                                         {[0, 1, 2].map(offset => {
+//                                           const year = new Date().getFullYear() + offset
+//                                           return <SelectItem key={year} value={year.toString()}>{year}</SelectItem>
+//                                         })}
+//                                       </SelectContent>
+//                                     </Select>
+//                                   </div>
+//                                 </div>
+//                                 <div className="grid grid-cols-2 gap-4 mb-4">
+//                                   <div>
+//                                     <Label className="text-gray-300">Amount ({student.fee_plan.currency})</Label>
+//                                     <Input
+//                                       type="number"
+//                                       step="0.01"
+//                                       value={monthlyFeeForm.amount}
+//                                       onChange={(e) => setMonthlyFeeForm(prev => ({ ...prev, amount: e.target.value }))}
+//                                       className="bg-[#1a1a1a] border-gray-600 text-white"
+//                                       placeholder="0.00"
+//                                     />
+//                                   </div>
+//                                   <div>
+//                                     <Label className="text-gray-300">Due Date</Label>
+//                                     <Input
+//                                       type="date"
+//                                       value={monthlyFeeForm.due_date}
+//                                       onChange={(e) => setMonthlyFeeForm(prev => ({ ...prev, due_date: e.target.value }))}
+//                                       className="bg-[#1a1a1a] border-gray-600 text-white"
+//                                       onFocus={(e) => {
+                               
+//                                         if (monthlyFeeForm.month && monthlyFeeForm.year) {
+//                                           const monthIndex = months.findIndex(m => m.toLowerCase() === monthlyFeeForm.month)
+//                                           if (monthIndex !== -1) {
+//                                             const defaultDate = new Date(parseInt(monthlyFeeForm.year), monthIndex, 1)
+//                                             const formattedDate = defaultDate.toISOString().split('T')[0]
+                                          
+//                                             if (!monthlyFeeForm.due_date) {
+//                                               setMonthlyFeeForm(prev => ({ ...prev, due_date: formattedDate }))
+//                                             }
+//                                           }
+//                                         }
+//                                       }}
+//                                     />
+//                                   </div>
+//                                 </div>
+//                                 <div className="flex gap-2">
+//                                   <Button 
+//                                     onClick={handleAddMonthlyFee} 
+//                                     disabled={addingMonthlyFee}
+//                                     size="sm" 
+//                                     className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+//                                   >
+//                                     {addingMonthlyFee ? (
+//                                       <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+//                                     ) : (
+//                                       <Plus className="w-3 h-3 mr-1" />
+//                                     )}
+//                                     {addingMonthlyFee ? 'Adding...' : 'Add'}
+//                                   </Button>
+//                                   <Button 
+//                                     variant="outline" 
+//                                     onClick={() => setShowAddMonthlyFee(false)}
+//                                     size="sm"
+//                                     className="text-gray-300 border-gray-600"
+//                                   >
+//                                     Cancel
+//                                   </Button>
+//                                 </div>
+//                               </div>
+//                             )}
+
+//                             {/* Monthly Fees List */}
+//                             <div className="space-y-3">
+//                               {monthlyFees.length === 0 ? (
+//                                 <div className="p-4 text-center text-gray-500 bg-[#2a2a2a] rounded-lg">
+//                                   No monthly fees added yet
+//                                 </div>
+//                               ) : (
+//                                 monthlyFees.map((fee) => (
+//                                   <div key={fee.id} className="p-4 bg-[#2a2a2a] rounded-lg hover:bg-[#333333] transition-colors">
+//                                     <div className="flex items-center justify-between">
+//                                       <div className="flex items-center gap-4">
+//                                         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20">
+//                                           <Calendar className="w-5 h-5 text-blue-400" />
+//                                         </div>
+//                                         <div>
+//                                           <div className="font-semibold text-white">
+//                                             {fee.month} {fee.year}
+//                                           </div>
+//                                           <div className="font-medium text-green-400">
+//                                             {student.fee_plan.currency} {Number(fee.amount).toLocaleString()}
+//                                           </div>
+//                                           <div className="text-sm text-gray-400">
+//                                             Due: {new Date(fee.due_date).toLocaleDateString()}
+//                                           </div>
+//                                           {fee.paid_date && (
+//                                             <div className="text-sm text-green-400">
+//                                               Paid: {new Date(fee.paid_date).toLocaleDateString()}
+//                                             </div>
+//                                           )}
+//                                         </div>
+//                                       </div>
+                                      
+//                                       <div className="flex items-center gap-2">
+//                                         <Badge className={getStatusColor(fee.status)}>
+//                                           {fee.status}
+//                                         </Badge>
+                                        
+//                                         {fee.status === 'pending' && (
+//                                           <Button
+//                                             size="sm"
+//                                             onClick={() => updateMonthlyFeeStatus(fee.id, 'paid')}
+//                                             disabled={updatingMonthlyFee === fee.id}
+//                                             className="bg-green-600 hover:bg-green-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+//                                           >
+//                                             {updatingMonthlyFee === fee.id ? (
+//                                               <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+//                                             ) : (
+//                                               <CheckCircle className="w-3 h-3 mr-1" />
+//                                             )}
+//                                             {updatingMonthlyFee === fee.id ? 'Updating...' : 'Mark Paid'}
+//                                           </Button>
+//                                         )}
+                                        
+//                                         {fee.status === 'paid' && (
+//                                           <Button
+//                                             size="sm"
+//                                             variant="outline"
+//                                             onClick={() => updateMonthlyFeeStatus(fee.id, 'pending')}
+//                                             disabled={updatingMonthlyFee === fee.id}
+//                                             className="text-gray-400 border-gray-600 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+//                                           >
+//                                             {updatingMonthlyFee === fee.id ? (
+//                                               <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+//                                             ) : null}
+//                                             {updatingMonthlyFee === fee.id ? 'Updating...' : 'Unpay'}
+//                                           </Button>
+//                                         )}
+//                                       </div>
+//                                     </div>
+//                                   </div>
+//                                 ))
+//                               )}
+//                             </div>
+//                           </div>
+//                         )}
+
+//                       </>
+//                     ) : (
+//                       <div className="p-8 text-center text-gray-500">
+//                         <DollarSign className="w-12 h-12 mx-auto mb-4 text-gray-600" />
+//                         <h3 className="mb-2 text-lg font-medium text-gray-400">No Fee Plan Set</h3>
+//                         <p className="mb-4">Create a fee plan to start managing payments for this student.</p>
+//                         <Button onClick={() => setEditingFee(true)} className="bg-green-600 hover:bg-green-700">
+//                           <Plus className="w-4 h-4 mr-2" />
+//                           Create Fee Plan
+//                         </Button>
+//                       </div>
+//                     )}
+//                   </div>
+//                 )}
+//               </CardContent>
+//             </Card>
+//           </div>   
