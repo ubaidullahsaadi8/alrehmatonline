@@ -74,9 +74,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Main Header - Clean & Professional */}
-      <header className={`fixed top-[0px] left-0 right-0 z-50 bg-white border-b border-gray-200 transition-all duration-300 ${
-        scrolled ? 'shadow-lg' : ''
+      {/* Main Header - Green Theme */}
+      <header className={`fixed top-[0px] left-0 right-0 z-50 bg-[#0f3a2e] border-b border-[#1a4d3c] transition-all duration-300 ${
+        scrolled ? 'shadow-xl' : ''
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between" >
           {/* Logo - Just PNG */}
@@ -95,31 +95,31 @@ export default function Navbar() {
           <nav className="hidden lg:flex items-center gap-1">
             <Link
               href="/"
-              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
+              className="px-4 py-2 text-white hover:text-[#E6B325] hover:bg-white/10 rounded-lg font-semibold text-sm transition-colors"
             >
               Home
             </Link>
             <Link
               href="/testimonials"
-              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
+              className="px-4 py-2 text-white hover:text-[#E6B325] hover:bg-white/10 rounded-lg font-semibold text-sm transition-colors"
             >
               Reviews
             </Link>
             <Link
               href="/courses"
-              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
+              className="px-4 py-2 text-white hover:text-[#E6B325] hover:bg-white/10 rounded-lg font-semibold text-sm transition-colors"
             >
               Courses
             </Link>
             <Link
               href="/services"
-              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
+              className="px-4 py-2 text-white hover:text-[#E6B325] hover:bg-white/10 rounded-lg font-semibold text-sm transition-colors"
             >
               Services
             </Link>
             <Link
               href="/contact"
-              className="px-4 py-2 text-gray-700 hover:text-[#0f3a2e] hover:bg-gray-50 rounded-lg font-semibold text-sm transition-colors"
+              className="px-4 py-2 text-white hover:text-[#E6B325] hover:bg-white/10 rounded-lg font-semibold text-sm transition-colors"
             >
               Contact
             </Link>
@@ -135,8 +135,8 @@ export default function Navbar() {
                 <SimpleDropdown
                   align="right"
                   trigger={
-                    <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
-                      <div className="w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-[#0f3a2e] to-[#1a4d3c] flex items-center justify-center border-2 border-[#E6B325]">
+                    <div className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-lg transition-colors cursor-pointer">
+                      <div className="w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-[#E6B325] to-[#D4A017] flex items-center justify-center border-2 border-white shadow-md">
                         {user.avatar ? (
                           <img
                             src={user.avatar}
@@ -149,10 +149,10 @@ export default function Navbar() {
                           </span>
                         )}
                       </div>
-                      <span className="text-gray-700 font-semibold text-sm">
+                      <span className="text-white font-semibold text-sm">
                         {user.name.split(" ")[0]}
                       </span>
-                      <ChevronDown className="h-4 w-4 text-gray-500" />
+                      <ChevronDown className="h-4 w-4 text-[#E6B325]" />
                     </div>
                   }
                 >
@@ -175,12 +175,12 @@ export default function Navbar() {
             ) : (
               <div className="flex items-center gap-3">
                 <Link href="/signup">
-                  <Button className="bg-[#0f3a2e] hover:bg-[#1a4d3c] text-white px-5 py-2 rounded-lg font-semibold text-sm transition-colors">
+                  <Button className="bg-white hover:bg-gray-100 text-[#0f3a2e] px-5 py-2 rounded-lg font-semibold text-sm transition-colors shadow-md">
                     Sign Up
                   </Button>
                 </Link>
                 <Link href="/login">
-                  <Button className="bg-[#E6B325] hover:bg-[#D4A017] text-white px-5 py-2 rounded-lg font-semibold text-sm transition-colors">
+                  <Button className="bg-[#E6B325] hover:bg-[#D4A017] text-white px-5 py-2 rounded-lg font-semibold text-sm transition-colors shadow-md">
                     Login
                   </Button>
                 </Link>
@@ -190,11 +190,11 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <Menu className="w-6 h-6 text-gray-700" />
+            <Menu className="w-6 h-6 text-white" />
           </button>
 
         </div>

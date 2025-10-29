@@ -48,10 +48,10 @@ export default function NotificationBell() {
         <TooltipTrigger asChild>
           <Link 
             href={notificationLink} 
-            className="relative inline-flex items-center p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="relative inline-flex items-center p-2 hover:bg-white/10 rounded-lg transition-colors"
             aria-label={`${count} notifications`}
           >
-            <Bell className="h-5 w-5 text-gray-700" />
+            <Bell className="h-5 w-5 text-[#E6B325]" />
             {count > 0 && (
               <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] text-xs flex items-center justify-center bg-red-500 text-white px-1 font-bold rounded-full">
                 {count > 99 ? '99+' : count}
