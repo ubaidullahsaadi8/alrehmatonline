@@ -202,11 +202,11 @@ export default async function TeacherDashboard() {
 
           {/* Dashboard Cards */}
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
-            {[
+            {[  
               { icon: BookOpen, title: 'My Courses', desc: 'Manage assigned courses, content, and curriculum', href: '/teacher/courses', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 0 },
               { icon: Users, title: 'My Students', desc: 'View enrolled students, progress, and profiles', href: '/teacher/students', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 100 },
-              { icon: Calendar, title: 'Meetings', desc: 'Schedule and manage course meetings with students', href: '/teacher/meetings', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 200 },
-              { icon: MessageSquare, title: 'Messages', desc: 'Send notifications and messages to students', href: '/teacher/messages', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 300 },
+              // { icon: Calendar, title: 'Meetings', desc: 'Schedule and manage course meetings with students', href: '/teacher/meetings', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 200 },
+              // { icon: MessageSquare, title: 'Messages', desc: 'Send notifications and messages to students', href: '/teacher/messages', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 300 },
               { icon: Wallet, title: 'Account Book', desc: 'View your salary records and payment history', href: '/teacher/account-book', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 400 },
               { icon: Settings, title: 'Settings', desc: 'Manage your profile and teaching preferences', href: '/teacher/settings', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 500 }
             ].map((card, index) => (
