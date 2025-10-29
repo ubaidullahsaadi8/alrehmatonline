@@ -21,7 +21,7 @@ import SimpleDropdown from "./simple-dropdown";
 import SimpleMenuItem, { SimpleMenuDivider } from "./simple-menu-item";
 import "@/styles/islamic-pattern.css";
 import Image from "next/image";
-import logo from "../public/logo.png"
+import logo from "../public/white-logo.png"
 
 
 
