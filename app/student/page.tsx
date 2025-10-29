@@ -160,13 +160,13 @@ export default async function StudentDashboard() {
           </div>
 
           {/* Dashboard Cards */}
-          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-2 mb-8">
             {[
               { icon: BookOpen, title: 'My Courses', desc: 'View enrolled courses and track your progress', href: '/student/courses', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 0 },
-              { icon: User, title: 'My Instructors', desc: 'View your instructors and send messages', href: '/student/instructors', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 100 },
-              { icon: Video, title: 'Meetings', desc: 'Join course meetings and view schedules', href: '/student/meetings', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 200 },
-              { icon: Calendar, title: 'Schedule', desc: 'View your course schedule and important dates', href: '/student/schedule', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 400 },
-              { icon: DollarSign, title: 'Account Book', desc: 'View fee details and payment status for all courses', href: '/student/account-book', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 500 },
+              // { icon: User, title: 'My Instructors', desc: 'View your instructors and send messages', href: '/student/instructors', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 100 },
+              // { icon: Video, title: 'Meetings', desc: 'Join course meetings and view schedules', href: '/student/meetings', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 200 },
+              // { icon: Calendar, title: 'Schedule', desc: 'View your course schedule and important dates', href: '/student/schedule', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 400 },
+              // { icon: DollarSign, title: 'Account Book', desc: 'View fee details and payment status for all courses', href: '/student/account-book', gradient: 'from-[#E6B325] to-[#D4A017]', delay: 500 },
               { icon: Settings, title: 'Settings', desc: 'Manage your account and reset your password', href: '/student/settings', gradient: 'from-[#0f3a2e] to-[#1a4d3c]', delay: 600 }
             ].map((card, index) => (
               <div
@@ -193,13 +193,13 @@ export default async function StudentDashboard() {
             ))}
             
             {/* Notification Card - Special Position */}
-            <div className="animate-slide-up-fade" style={{ animationDelay: '300ms' }}>
+            {/* <div className="animate-slide-up-fade" style={{ animationDelay: '300ms' }}>
               <NotificationCard />
-            </div>
+            </div> */}
           </div>
 
           {/* Learning Overview */}
-          <div className="bg-gradient-to-br from-white to-gray-50 rounded-[3rem] p-8 shadow-2xl border-4 border-white animate-slide-up-fade" style={{ animationDelay: '700ms' }}>
+          {/* <div className="bg-gradient-to-br from-white to-gray-50 rounded-[3rem] p-8 shadow-2xl border-4 border-white animate-slide-up-fade" style={{ animationDelay: '700ms' }}>
             <h2 className="text-3xl font-black text-gray-900 mb-8 text-center">Learning Overview</h2>
             <div className="grid gap-6 md:grid-cols-4">
               {[
@@ -211,14 +211,14 @@ export default async function StudentDashboard() {
                 <div key={index} className="text-center group/stat">
                   <div className="relative inline-block mb-3">
                     <div className={`text-5xl font-black bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent group-hover/stat:scale-110 transition-transform duration-500`}>
-                      {stat.value}
+                      {stat.value}   
                     </div>
                   </div>
                   <div className="text-gray-600 font-semibold">{stat.label}</div>
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       

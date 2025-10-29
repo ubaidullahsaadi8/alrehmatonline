@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       FROM student_courses sc
       JOIN courses c ON sc.course_id = c.id
       WHERE sc.student_id = ${user.id}
-      AND sc.status = 'active'
+      AND sc.status IN ('active', 'enrolled')
       ORDER BY sc.created_at DESC
     `
 

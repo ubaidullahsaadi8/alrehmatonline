@@ -292,9 +292,9 @@ export default function StudentCourseDetailPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-6">   
             {/* Notifications Card */}
-            <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
+            {/* <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
               <CardHeader>
                 <CardTitle className="text-lg text-white flex items-center gap-2">
                   <Bell className="h-5 w-5 text-yellow-400" />
@@ -325,10 +325,10 @@ export default function StudentCourseDetailPage() {
                   </div>
                 )}
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Quick Actions */}
-            <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
+            {/* <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
               <CardHeader>
                 <CardTitle className="text-lg text-white">Quick Actions</CardTitle>
               </CardHeader>
@@ -340,7 +340,7 @@ export default function StudentCourseDetailPage() {
                   </Button>
                 </Link>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </div>
