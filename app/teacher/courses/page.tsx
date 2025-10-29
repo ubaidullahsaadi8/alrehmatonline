@@ -188,7 +188,7 @@ export default function TeacherCoursesPage() {
                     </div>
 
                     
-                    <div className="p-4 bg-[#2a2a2a] rounded-lg">
+                    {/* <div className="p-4 bg-[#2a2a2a] rounded-lg">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-3">
                           <Video className="w-5 h-5 text-green-400" />
@@ -281,16 +281,16 @@ export default function TeacherCoursesPage() {
                           )}
                         </div>
                       )}
-                    </div>
+                    </div> */}
 
                     
                     <div className="flex gap-3">
-                      <Link href={`/teacher/courses/${course.id}/messages`} className="flex-1">
+                      {/* <Link href={`/teacher/courses/${course.id}/messages`} className="flex-1">
                         <Button variant="outline" className="w-full text-gray-300 border-gray-600 hover:bg-gray-700">
                           <MessageSquare className="w-4 h-4 mr-2" />
                           Send Message
                         </Button>
-                      </Link>
+                      </Link> */}  
                       <Link href={`/teacher/courses/${course.id}`} className="flex-1">
                         <Button className="w-full text-black bg-white hover:bg-gray-200">
                           <BookOpen className="w-4 h-4 mr-2" />

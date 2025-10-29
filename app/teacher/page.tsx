@@ -25,7 +25,7 @@ async function fetchTeacherStats(instructorId: string) {
       SELECT COUNT(DISTINCT sc.student_id)::int as count
       FROM student_courses sc
       JOIN course_instructors ci ON sc.course_id = ci.course_id
-      WHERE ci.instructor_id = ${instructorId} AND ci.status = 'active' AND sc.status = 'active'
+      WHERE ci.instructor_id = ${instructorId} AND ci.status = 'active' AND sc.status IN ('active', 'enrolled')
     `
 
     // Get upcoming meetings count (this would need a meetings table, for now return 0)

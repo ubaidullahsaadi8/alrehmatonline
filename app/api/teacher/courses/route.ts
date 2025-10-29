@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
           course_id,
           COUNT(*)::int as student_count
         FROM student_courses
-        WHERE status = 'active'
+        WHERE status IN ('active', 'enrolled')
         GROUP BY course_id
       )
       SELECT 
@@ -93,7 +93,7 @@ export async function GET(request: NextRequest) {
           FROM student_courses sc
           JOIN users u ON sc.student_id = u.id
           WHERE sc.course_id = ${course.id}
-          AND sc.status = 'active'
+          AND sc.status IN ('active', 'enrolled')
           ORDER BY sc.enrollment_date DESC
         `
 
@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
             meeting_time
           FROM student_courses
           WHERE course_id = ${course.id}
-          AND status = 'active'
+          AND status IN ('active', 'enrolled')
           AND (meeting_link IS NOT NULL OR meeting_date IS NOT NULL OR meeting_time IS NOT NULL)
           LIMIT 1
         `

@@ -219,7 +219,7 @@ export default function TeacherStudentsPage() {
                       </div>
 
                       
-                      <div className="flex flex-col md:flex-row gap-3">
+                      {/* <div className="flex flex-col md:flex-row gap-3">
                         <Link href={`/teacher/students/${student.id}`}>
                           <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700">
                             <BookOpen className="w-4 h-4 mr-2" />
@@ -232,7 +232,7 @@ export default function TeacherStudentsPage() {
                             Send Message
                           </Button>
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
 
                     
@@ -246,10 +246,10 @@ export default function TeacherStudentsPage() {
                               <div className="text-gray-400 text-sm mb-2">
                                 Enrolled: {new Date(course.enrolled_at).toLocaleDateString()}
                               </div>
-                              <div className="flex items-center justify-between">
+                              {/* <div className="flex items-center justify-between">
                                 <span className="text-gray-400 text-sm">Progress:</span>
                                 <span className="text-blue-400 font-semibold">{course.progress}%</span>
-                              </div>
+                              </div> */}
                             </div>
                           ))}
                         </div>

@@ -350,12 +350,12 @@ export default function TeacherCourseDetailPage() {
                   View All Students ({course.students.length})
                 </Button>
               </Link>
-              <Link href={`/teacher/courses/${courseId}/students`}>
+              {/* <Link href={`/teacher/courses/${courseId}/students`}>
                 <Button variant="outline" className="text-gray-300 border-gray-600 hover:bg-gray-700">
                   <MessageSquare className="w-4 h-4 mr-2" />
                   Send Message
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -365,7 +365,7 @@ export default function TeacherCourseDetailPage() {
           <div className="space-y-6 lg:col-span-1">
             
             {/* Meeting Management */}
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            {/* <Card className="bg-[#1a1a1a] border-gray-800">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
                   <Video className="w-5 h-5 text-green-400" />
@@ -464,10 +464,10 @@ export default function TeacherCourseDetailPage() {
                   </div>
                 )}
               </CardContent>
-            </Card>
-
+            </Card> */}
+  
             {/* Send Notification */}
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            {/* <Card className="bg-[#1a1a1a] border-gray-800">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
                   <Bell className="w-5 h-5 text-yellow-400" />
@@ -496,10 +496,10 @@ export default function TeacherCourseDetailPage() {
                   {sendingNotification ? "Sending..." : "Send Notification"}
                 </Button>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Bank Details Management */}
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            {/* <Card className="bg-[#1a1a1a] border-gray-800">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-white">
                   <Building2 className="w-5 h-5 text-yellow-400" />
@@ -643,7 +643,7 @@ export default function TeacherCourseDetailPage() {
                   </div>
                 )}
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Course Stats */}
             <Card className="bg-[#1a1a1a] border-gray-800">
@@ -658,16 +658,16 @@ export default function TeacherCourseDetailPage() {
                   <span className="text-gray-300">Total Students</span>
                   <span className="font-semibold text-white">{course.students.length}</span>
                 </div>
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                   <span className="text-gray-300">Active Enrollments</span>
                   <span className="font-semibold text-white">
                     {course.students.filter(s => s.status === 'active').length}
                   </span>
-                </div>
-                <div className="flex items-center justify-between">
+                </div> */}
+                {/* <div className="flex items-center justify-between">
                   <span className="text-gray-300">Duration</span>
                   <span className="font-semibold text-white">{course.duration}</span>
-                </div>
+                </div> */}
               </CardContent>
             </Card>
           </div>
@@ -734,20 +734,20 @@ export default function TeacherCourseDetailPage() {
                             )}
                             
                             {/* Action Buttons */}
-                            <Dialog open={notificationDialogOpen && selectedStudent?.id === student.id} onOpenChange={(open) => {
+                            {/* <Dialog open={notificationDialogOpen && selectedStudent?.id === student.id} onOpenChange={(open) => {
                               setNotificationDialogOpen(open)
                               if (!open) {
                                 setSelectedStudent(null)
                                 setStudentNotificationMessage("")
                               }
                             }}>
-                              <DialogTrigger asChild>
+                             <DialogTrigger asChild>
                                 <Button 
                                   size="sm" 
                                   variant="outline" 
                                   className="text-purple-300 border-purple-600 hover:bg-purple-900/20"
                                   onClick={() => setSelectedStudent(student)}
-                                >
+                                > 
                                   <Bell className="w-4 h-4 mr-1" />
                                   Send Notification
                                 </Button>
@@ -800,7 +800,7 @@ export default function TeacherCourseDetailPage() {
                                   </div>
                                 </div>
                               </DialogContent>
-                            </Dialog>
+                            </Dialog> */}
 
                             <Link href={`/teacher/courses/${courseId}/students/${student.id}`}>
                               <Button size="sm" variant="outline" className="text-gray-300 border-gray-600 hover:bg-gray-700">
