@@ -263,7 +263,7 @@ export default function CourseStudentsPage() {
             title={`Students in ${course.title}`}
           />
           <p className="mt-2 text-gray-400">
-            Manage student enrollments, fees, and communications
+            Manage student.
           </p>
         </div>
 
@@ -291,34 +291,6 @@ export default function CourseStudentsPage() {
                   </p>
                 </div>
                 <CheckCircle className="w-8 h-8 text-green-400" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-[#1a1a1a] border-gray-800">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-400">Payment Pending</p>
-                  <p className="text-2xl font-bold text-white">
-                    {students.filter(s => s.payment_status === 'pending' || s.payment_status === 'overdue').length}
-                  </p>
-                </div>
-                <DollarSign className="w-8 h-8 text-yellow-400" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-[#1a1a1a] border-gray-800">
-            <CardContent className="pt-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-400">With Fee Plans</p>
-                  <p className="text-2xl font-bold text-white">
-                    {students.filter(s => s.fee_plan).length}
-                  </p>
-                </div>
-                <DollarSign className="w-8 h-8 text-green-400" />
               </div>
             </CardContent>
           </Card>
@@ -358,74 +330,6 @@ export default function CourseStudentsPage() {
                 >
                   Active
                 </Button>
-                <Button
-                  variant={filterStatus === "payment_pending" ? "default" : "outline"}
-                  onClick={() => setFilterStatus("payment_pending")}
-                  className={filterStatus === "payment_pending" ? "" : "text-gray-300 border-gray-600"}
-                >
-                  Payment Pending
-                </Button>
-              </div>
-
-              {/* Actions */}
-              <div className="flex gap-2">
-                <Dialog open={showMessageDialog} onOpenChange={setShowMessageDialog}>
-                  <DialogTrigger asChild>
-                    <Button 
-                      disabled={selectedStudents.length === 0}
-                      className="bg-blue-600 hover:bg-blue-700"
-                    >
-                      <MessageSquare className="w-4 h-4 mr-2" />
-                      Send Message ({selectedStudents.length})
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-[#1a1a1a] border-gray-800 text-white">
-                    <DialogHeader>
-                      <DialogTitle>Send Message to Students</DialogTitle>
-                      <DialogDescription className="text-gray-400">
-                        Send a message to {selectedStudents.length} selected student(s)
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4">
-                      <div>
-                        <Label className="text-gray-300">Subject</Label>
-                        <Input
-                          value={message.subject}
-                          onChange={(e) => setMessage(prev => ({ ...prev, subject: e.target.value }))}
-                          placeholder="Enter message subject"
-                          className="bg-[#2a2a2a] border-gray-600 text-white"
-                        />
-                      </div>
-                      <div>
-                        <Label className="text-gray-300">Message</Label>
-                        <Textarea
-                          value={message.content}
-                          onChange={(e) => setMessage(prev => ({ ...prev, content: e.target.value }))}
-                          placeholder="Enter your message..."
-                          className="bg-[#2a2a2a] border-gray-600 text-white"
-                          rows={6}
-                        />
-                      </div>
-                      <div className="flex gap-2">
-                        <Button 
-                          onClick={handleSendMessage} 
-                          disabled={sending}
-                          className="flex-1 bg-blue-600 hover:bg-blue-700"
-                        >
-                          <Send className="w-4 h-4 mr-2" />
-                          {sending ? 'Sending...' : 'Send Message'}
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          onClick={() => setShowMessageDialog(false)}
-                          className="text-gray-300 border-gray-600"
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
               </div>
             </div>
           </CardContent>
@@ -510,7 +414,7 @@ export default function CourseStudentsPage() {
                                 className="bg-blue-600 hover:bg-blue-700"
                               >
                                 <DollarSign className="w-4 h-4 mr-1" />
-                                Manage Fee
+                                view details
                               </Button>
                             </Link>
                           </div>
@@ -533,66 +437,11 @@ export default function CourseStudentsPage() {
                               <Calendar className="w-3 h-3" />
                               {new Date(student.enrollment_date).toLocaleDateString()}
                             </div>
-                          </div>
-
-                          <div>
-                            <span className="text-xs text-gray-400">Fee Plan</span>
-                            <div className="mt-1 text-sm text-white">
-                              {student.fee_plan ? (
-                                <div className="flex items-center gap-1">
-                                  <DollarSign className="w-3 h-3 text-green-400" />
-                                  {student.fee_plan.fee_type === 'monthly' 
-                                    ? `${student.fee_plan.currency} ${student.fee_plan.monthly_amount}/mo` 
-                                    : `${student.fee_plan.currency} ${student.fee_plan.total_amount} total`
-                                  }
-                                </div>
-                              ) : (
-                                <span className="text-gray-500">Not set</span>
-                              )}
-                            </div>
-                          </div>
-
-                          <div>
-                            <span className="text-xs text-gray-400">Payment Status</span>
-                            <div className="mt-1">
-                              {student.payment_status ? (
-                                <Badge className={getStatusColor(student.payment_status)}>
-                                  <span className="flex items-center gap-1">
-                                    {getPaymentStatusIcon(student.payment_status)}
-                                    {student.payment_status}
-                                  </span>
-                                </Badge>
-                              ) : (
-                                <span className="text-sm text-gray-500">N/A</span>
-                              )}
-                            </div>
-                          </div>
+                          </div>             
+                        </div>        
                         </div>
-
-                        {/* Payment Summary (if available) */}
-                        {(student.total_paid !== undefined || student.outstanding_amount !== undefined) && (
-                          <div className="flex gap-4 p-2 mt-2 text-sm bg-[#1a1a1a] rounded">
-                            {student.total_paid !== undefined && (
-                              <div>
-                                <span className="text-gray-400">Total Paid: </span>
-                                <span className="font-medium text-green-400">
-                                  {student.fee_plan?.currency} {student.total_paid}
-                                </span>
-                              </div>
-                            )}
-                            {student.outstanding_amount !== undefined && student.outstanding_amount > 0 && (
-                              <div>
-                                <span className="text-gray-400">Outstanding: </span>
-                                <span className="font-medium text-yellow-400">
-                                  {student.fee_plan?.currency} {student.outstanding_amount}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        )}
                       </div>
                     </div>
-                  </div>
                 ))
               )}
             </div>

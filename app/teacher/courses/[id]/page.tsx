@@ -721,7 +721,7 @@ export default function TeacherCourseDetailPage() {
                             </Badge>
                             
                             {/* Fee Status */}
-                            {student.fee_plan && (
+                            {/* {student.fee_plan && (
                               <div className="flex items-center gap-1 text-sm">
                                 <DollarSign className="w-4 h-4 text-green-400" />
                                 <span className="text-gray-300">
@@ -731,7 +731,7 @@ export default function TeacherCourseDetailPage() {
                                   }
                                 </span>
                               </div>
-                            )}
+                            )} */}
                             
                             {/* Action Buttons */}
                             {/* <Dialog open={notificationDialogOpen && selectedStudent?.id === student.id} onOpenChange={(open) => {
