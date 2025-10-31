@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   title: "LearnQuraan - Online Quran Academy",
   description: "Learn Quran online with qualified teachers. Professional Quran teaching services for all ages. Start your Quranic journey today.",
   generator: "v0.app",
+  icons: {
+    icon: '/white-logo.png',
+    shortcut: '/white-logo.png',
+    apple: '/white-logo.png',
+  },
 }
 
 export default function RootLayout({
