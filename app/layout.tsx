@@ -14,9 +14,16 @@ import { Providers } from "@/components/providers"
 import WhatsAppFloat from "@/components/whatsapp-float"
 
 export const metadata: Metadata = {
-  title: "HatBrain - Software Development Company",
-  description: "Leading tech company specializing in software development, AI solutions, and digital transformation",
+  title: "LearnQuraan - Online Quran Academy",
+  description: "Learn Quran online with qualified teachers. Professional Quran teaching services for all ages. Start your Quranic journey today.",
   generator: "v0.app",
+  icons: {
+    icon: [  
+      { url: '/white-logo.png', type: 'image/png' },
+    ],
+    shortcut: '/white-logo.png',
+    apple: '/white-logo.png',
+  },
 }
 
 export default function RootLayout({
