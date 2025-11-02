@@ -211,7 +211,7 @@ export default function ServicesSection() {
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></span>
                   <span className="relative z-10 flex items-center gap-3">
                     <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
-                    View All Services
+                    View All Packages
                     <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </Button>

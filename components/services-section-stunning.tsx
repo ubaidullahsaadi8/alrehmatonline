@@ -227,7 +227,7 @@ export default function ServicesSectionStunning() {
                   <span className="relative z-10 flex items-center gap-3">
                     <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 animate-spin-slow" />
                     <Zap className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse" />
-                    View All Services
+                    View All Packages
                     <ArrowRight className="w-6 h-6 sm:w-7 sm:h-7 group-hover:translate-x-3 transition-transform duration-300" />
                     <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 animate-spin-slow" />
                   </span>
