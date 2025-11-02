@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
         image,
         features,
         price,
+        currency,
         featured,
         created_at as "createdAt",
         updated_at as "updatedAt"
@@ -58,7 +59,7 @@ export async function POST(req: NextRequest) {
     }
 
     
-    const { title, description, imageUrl, content, price, featured } = await req.json()
+    const { title, description, imageUrl, content, price, currency, featured } = await req.json()
 
     
     if (!title || !description) {
@@ -79,6 +80,7 @@ export async function POST(req: NextRequest) {
         image, 
         features, 
         price, 
+        currency,
         featured
       ) VALUES (
         ${id},
@@ -87,6 +89,7 @@ export async function POST(req: NextRequest) {
         ${imageUrl || '/placeholder.jpg'},
         ${content ? [content] : []}, 
         ${price ? String(price) : '0'},
+        ${currency || 'USD'},
         ${featured || false}
       )
     `

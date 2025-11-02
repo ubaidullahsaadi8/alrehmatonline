@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import Image from "next/image"
 import { CheckCircle2, ArrowRight, Sparkles, Star, Zap, Crown } from "lucide-react"
+import { getCurrencyByCode } from "@/lib/currencies"
 
 interface Service {
   id: string
@@ -16,6 +17,7 @@ interface Service {
   image: string
   features: string[]
   price: string
+  currency: string
   featured: boolean
 }
 
@@ -128,109 +130,93 @@ export default function ServicesPage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
-                {services.map((service, index) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                {services.map((service, index) => {
+                  const currencyInfo = getCurrencyByCode(service.currency || 'USD')
+                  const priceDisplay = service.price ? `${currencyInfo.symbol}${service.price}` : 'Contact for pricing'
+                  
+                  return (
                   <div
                     key={service.id}
-                    className={`group relative bg-white rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_60px_rgba(230,179,37,0.3)] transition-all duration-700 border-4 border-white hover:border-[#E6B325]/50 flex flex-col h-full transform hover:scale-105 hover:-translate-y-4 perspective-1000 ${
+                    className={`group relative bg-white rounded-[2rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_60px_rgba(230,179,37,0.3)] transition-all duration-700 border-4 border-white hover:border-[#E6B325]/50 flex flex-col h-full transform hover:scale-105 hover:-translate-y-4 ${
                       isVisible ? 'animate-slide-up-fade' : 'opacity-0'
                     }`}
                     style={{
                       animationDelay: `${index * 0.15}s`,
-                      transformStyle: "preserve-3d",
+                      backgroundColor: index % 4 === 0 ? '#D4A017' : index % 4 === 1 ? '#E6B325' : index % 4 === 2 ? '#D4A017' : '#0f3a2e'
                     }}
                   >
-                    {/* 3D Tilt Effect Container */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#E6B325]/0 via-transparent to-[#0f3a2e]/0 group-hover:from-[#E6B325]/10 group-hover:to-[#0f3a2e]/10 transition-all duration-700 pointer-events-none z-10 group-hover:animate-shimmer-wave" />
-                    
                     {/* Sparkle Effects */}
-                    <Sparkles className="absolute top-4 left-4 w-6 h-6 text-[#E6B325] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse z-20" />
-                    <Sparkles className="absolute bottom-4 right-4 w-5 h-5 text-[#D4A017] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse z-20" style={{ animationDelay: "0.3s" }} />
-                    
-                    {/* Image Container with parallax */}
-                    <div className="relative h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden flex-shrink-0 group-hover:h-60 sm:group-hover:h-68 md:group-hover:h-76 lg:group-hover:h-84 transition-all duration-700">
-                      <Image
-                        src={service.image || "/placeholder.svg"}
-                        alt={service.title}
-                        fill
-                        className="object-cover group-hover:scale-125 group-hover:rotate-2 transition-all duration-1000 ease-out"
-                      />
-                      
-                      {/* Animated Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/50 transition-all duration-700" />
-                      
-                      {/* Mega Featured Badge */}
-                      {service.featured && (
-                        <Badge className="absolute top-4 right-4 bg-gradient-to-r from-[#E6B325] via-[#D4A017] to-[#E6B325] text-white border-none py-2.5 px-5 text-xs sm:text-sm font-black shadow-2xl shadow-[#E6B325]/50 animate-glow-pulse bg-size-200 animate-gradient-flow">
-                          <Star className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 fill-white animate-spin-slow" />
-                          Most Popular
-                        </Badge>
-                      )}
-                      
-                      {/* Floating Price Tag */}
-                      <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md rounded-full px-5 sm:px-6 py-2.5 sm:py-3 shadow-2xl shadow-black/30 group-hover:scale-110 group-hover:shadow-[#E6B325]/50 transition-all duration-500 animate-float-subtle">
-                        <span className="text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] bg-clip-text text-transparent">
-                          {service.price}
-                        </span>
-                      </div>
-                    </div>
+                    <Sparkles className="absolute top-4 left-4 w-6 h-6 text-white opacity-50 group-hover:opacity-100 transition-opacity duration-500 animate-pulse z-20" />
                     
                     {/* Content Container */}
-                    <div className="p-5 sm:p-6 md:p-7 lg:p-8 flex flex-col flex-grow relative z-20">
-                      {/* Title with glow */}
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900 mb-3 sm:mb-4 group-hover:text-[#0f3a2e] group-hover:text-shadow-glow transition-all duration-500 transform group-hover:scale-105">
+                    <div className="p-6 sm:p-8 flex flex-col flex-grow relative z-20">
+                      {/* Price Tag at Top */}
+                      <div className="text-center mb-6">
+                        <div className="text-4xl sm:text-5xl font-black text-white mb-2">
+                          {priceDisplay}
+                        </div>
+                        <div className="text-sm text-white/80 font-semibold">
+                          {currencyInfo.code} per Month
+                        </div>
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 text-center">
                         {service.title}
                       </h3>
                       
                       {/* Description */}
-                      <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-5 sm:mb-6 line-clamp-3 min-h-[4.5rem] group-hover:text-gray-700 transition-colors duration-300">
+                      <p className="text-white/90 text-sm leading-relaxed mb-6 text-center line-clamp-2">
                         {service.description}
                       </p>
                       
-                      {/* Features List with stagger animation */}
-                      <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-7 flex-grow">
+                      {/* Features List with icons */}
+                      <ul className="space-y-3 mb-6 flex-grow">
                         {service.features && service.features.length > 0 ? (
                           service.features.slice(0, 3).map((feature, idx) => (
                             <li
                               key={idx}
-                              className="flex items-start gap-2.5 sm:gap-3 text-gray-700 text-sm sm:text-base group/item transition-all duration-500"
-                              style={{ transitionDelay: `${idx * 0.1}s` }}
+                              className="flex items-center gap-3 text-white text-sm group/item transition-all duration-500"
                             >
-                              <div className="flex-shrink-0 mt-0.5">
-                                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-[#E6B325] via-[#D4A017] to-[#E6B325] flex items-center justify-center group-hover/item:scale-125 group-hover/item:rotate-12 transition-all duration-500 shadow-lg shadow-[#E6B325]/30 animate-pulse-subtle">
-                                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                                </div>
+                              <div className="flex-shrink-0">
+                                <CheckCircle2 className="w-5 h-5 text-white" />
                               </div>
-                              <span className="leading-relaxed group-hover/item:translate-x-1 transition-transform duration-300">{feature}</span>
+                              <span className="leading-relaxed">{feature}</span>
                             </li>
                           ))
                         ) : (
-                          <li className="flex items-start gap-2.5 sm:gap-3 text-gray-700 text-sm sm:text-base">
-                            <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#E6B325] mt-0.5 flex-shrink-0" />
+                          <li className="flex items-center gap-3 text-white text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-white" />
                             <span>Service details available on request</span>
                           </li>
                         )}
                       </ul>
                       
-                      {/* Mega CTA Button */}
-                      <div className="mt-auto pt-5 sm:pt-6 border-t-2 border-gray-100 group-hover:border-[#E6B325]/30 transition-colors duration-500">
+                      {/* CTA Button */}
+                      <div className="mt-auto">
                         <Link href={`/services/${service.id}`} className="block">
-                          <Button className="w-full group/btn relative overflow-hidden px-6 sm:px-8 py-5 sm:py-6 md:py-7 text-sm sm:text-base md:text-lg font-black bg-gradient-to-r from-[#0f3a2e] via-[#1a4d3c] to-[#0f3a2e] hover:from-[#1a4d3c] hover:via-[#0f3a2e] hover:to-[#1a4d3c] text-white transition-all duration-500 rounded-full shadow-xl hover:shadow-2xl hover:shadow-[#0f3a2e]/50 transform hover:scale-110 bg-size-200 animate-gradient-flow-slow">
-                            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out" />
-                            <span className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500">
-                              <span className="absolute top-0 left-1/4 w-2 h-2 bg-white rounded-full animate-ping" />
-                              <span className="absolute bottom-0 right-1/4 w-2 h-2 bg-white rounded-full animate-ping" style={{ animationDelay: "0.3s" }} />
-                            </span>
+                          <Button className="w-full group/btn relative overflow-hidden px-6 py-4 text-sm font-bold bg-white text-[#0f3a2e] hover:bg-white/90 transition-all duration-300 rounded-full shadow-lg hover:shadow-xl">
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                              Learn More
-                              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover/btn:translate-x-2 transition-transform duration-300" />
+                              Get Free Trial
+                              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                             </span>
                           </Button>
                         </Link>
                       </div>
+                      
+                      {/* Featured Badge */}
+                      {service.featured && (
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-white text-[#0f3a2e] border-none py-1.5 px-3 text-xs font-black shadow-lg">
+                            <Star className="w-3 h-3 mr-1 fill-current" />
+                            Popular
+                          </Badge>
+                        </div>
+                      )}
                     </div>
                   </div>
-                ))}
+                )})}
               </div>
             </>
           )}

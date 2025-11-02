@@ -26,6 +26,7 @@ export async function GET(
         image,
         features,
         price,
+        currency,
         featured,
         created_at as "createdAt",
         updated_at as "updatedAt"
@@ -66,7 +67,7 @@ export async function PUT(
     const id = params.id
 
     // Get service data from request
-    const { title, description, imageUrl, content, price, featured } = await req.json()
+    const { title, description, imageUrl, content, price, currency, featured } = await req.json()
 
     // Validate required fields
     if (!title || !description) {
@@ -95,6 +96,7 @@ export async function PUT(
         image = ${imageUrl || '/placeholder.jpg'},
         features = ${content ? [content] : []},
         price = ${price ? String(price) : '0'},
+        currency = ${currency || 'USD'},
         featured = ${featured || false},
         updated_at = NOW()
       WHERE id = ${id}

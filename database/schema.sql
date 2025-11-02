@@ -767,6 +767,7 @@ CREATE TABLE public.services (
     image text NOT NULL,
     features text[],
     price text NOT NULL,
+    currency text DEFAULT 'USD'::text,
     featured boolean DEFAULT false,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP

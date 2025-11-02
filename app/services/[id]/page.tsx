@@ -16,6 +16,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
 import { CheckCircle2, ArrowLeft, Zap, Shield, Clock, Calendar as CalendarIcon, AlertCircle } from "lucide-react"
+import { getCurrencyByCode } from "@/lib/currencies"
 
 interface Service {
   id: string
@@ -24,6 +25,7 @@ interface Service {
   image: string
   features: string[]
   price: string
+  currency: string
   featured: boolean
 }
 
@@ -349,7 +351,10 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
                 <CardContent className="pt-6">
                   <div className="text-center mb-6">
                     <div className="text-sm text-gray-600 mb-2">Starting at</div>
-                    <div className="text-4xl font-bold text-[#0f3a2e] mb-2">{service.price}</div>
+                    <div className="text-4xl font-bold text-[#0f3a2e] mb-2">
+                      {service.price ? `${getCurrencyByCode(service.currency || 'USD').symbol}${service.price}` : 'Contact for pricing'}
+                    </div>
+                    <div className="text-xs text-gray-500">{getCurrencyByCode(service.currency || 'USD').code} per Month</div>
                   </div>
 
                   <Tabs defaultValue="request" className="mt-6">

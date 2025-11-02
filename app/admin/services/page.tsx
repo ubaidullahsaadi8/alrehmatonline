@@ -30,6 +30,14 @@ import {
   ChevronLeft
 } from "lucide-react"
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select"
+import { currencies, getCurrencyByCode } from "@/lib/currencies"
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -57,6 +65,7 @@ interface Service {
   image: string | null
   features: string[] | null
   price: string | null
+  currency: string
   featured: boolean
   createdAt: string
   updatedAt: string
@@ -83,6 +92,7 @@ export default function ServicesPage() {
     imageUrl: "",
     content: "",
     price: "",
+    currency: "USD",
     featured: false
   })
   
@@ -143,6 +153,7 @@ export default function ServicesPage() {
           imageUrl: formData.imageUrl || null,
           content: formData.content,
           price: priceValue,
+          currency: formData.currency,
           featured: formData.featured
         }),
       })
@@ -194,6 +205,7 @@ export default function ServicesPage() {
           imageUrl: formData.imageUrl || null,
           content: formData.content,
           price: priceValue,
+          currency: formData.currency,
           featured: formData.featured
         }),
       })
@@ -272,6 +284,7 @@ export default function ServicesPage() {
       imageUrl: service.image || "",
       content: service.features ? service.features.join('\n') : "",
       price: service.price || "",
+      currency: service.currency || "USD",
       featured: service.featured
     })
     setIsEditDialogOpen(true)
@@ -294,6 +307,7 @@ export default function ServicesPage() {
       imageUrl: "",
       content: "",
       price: "",
+      currency: "USD",
       featured: false
     })
   }
@@ -394,7 +408,9 @@ export default function ServicesPage() {
               <CardContent>
                 <div className="flex justify-between items-center">
                   {service.price ? (
-                    <p className="font-semibold">${service.price}</p>
+                    <p className="font-semibold">
+                      {getCurrencyByCode(service.currency || 'USD').symbol}{service.price}
+                    </p>
                   ) : (
                     <p className="text-muted-foreground text-sm">No price set</p>
                   )}
@@ -466,7 +482,7 @@ export default function ServicesPage() {
               />
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="price">Price (optional)</Label>
                 <Input
@@ -478,6 +494,25 @@ export default function ServicesPage() {
                   onChange={(e) => setFormData({...formData, price: e.target.value})}
                   placeholder="e.g. 99.99"
                 />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="currency">Currency</Label>
+                <Select
+                  value={formData.currency}
+                  onValueChange={(value) => setFormData({...formData, currency: value})}
+                >
+                  <SelectTrigger id="currency">
+                    <SelectValue placeholder="Select currency" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {currencies.map((currency) => (
+                      <SelectItem key={currency.code} value={currency.code}>
+                        {currency.symbol} - {currency.name} ({currency.code})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               
               <div className="space-y-2">
@@ -567,7 +602,7 @@ export default function ServicesPage() {
               />
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="edit-price">Price (optional)</Label>
                 <Input
@@ -578,6 +613,25 @@ export default function ServicesPage() {
                   value={formData.price}
                   onChange={(e) => setFormData({...formData, price: e.target.value})}
                 />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="edit-currency">Currency</Label>
+                <Select
+                  value={formData.currency}
+                  onValueChange={(value) => setFormData({...formData, currency: value})}
+                >
+                  <SelectTrigger id="edit-currency">
+                    <SelectValue placeholder="Select currency" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {currencies.map((currency) => (
+                      <SelectItem key={currency.code} value={currency.code}>
+                        {currency.symbol} - {currency.name} ({currency.code})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               
               <div className="space-y-2">

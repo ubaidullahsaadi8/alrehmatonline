@@ -19,6 +19,7 @@ export async function GET(req: Request) {
           image,
           features,
           price,
+          currency,
           featured,
           created_at as "createdAt"
         FROM services 
@@ -34,6 +35,7 @@ export async function GET(req: Request) {
           image,
           features,
           price,
+          currency,
           featured,
           created_at as "createdAt"
         FROM services 
