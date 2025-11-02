@@ -198,7 +198,7 @@ export default function AdminDashboardLayout({ children }: AdminLayoutProps) {
                 <Menu className="h-6 w-6" />
               </Button>
               <h1 className="text-xl font-bold text-white hidden sm:block">
-                Alrehmat Admin
+                Al-Rehmat Admin
               </h1>
             </div>
 
