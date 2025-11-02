@@ -114,19 +114,19 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/testimonials" className="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 group">
+                  <span className="w-1 h-1 bg-amber-400 rounded-full group-hover:w-2 transition-all" />
+                  Reviews
+                </Link>
+              </li>
+              <li>    
                 <Link href="/services" className="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 group">
                   <span className="w-1 h-1 bg-amber-400 rounded-full group-hover:w-2 transition-all" />
-                  Services
+                  Packages
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-amber-400 rounded-full group-hover:w-2 transition-all" />
-                  Courses
-                </Link>
-              </li>
-              <li>
-                <Link href="/#testimonials" className="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 group">
+                <Link href="/testimonials" className="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 group">
                   <span className="w-1 h-1 bg-amber-400 rounded-full group-hover:w-2 transition-all" />
                   Testimonials
                 </Link>
@@ -142,7 +142,7 @@ export default function Footer() {
 
           {/* Our Courses */}
           <div className="mt-12">
-            <h3 className="text-lg font-bold mb-6 text-amber-300">Our Courses</h3>
+            <h3 className="text-lg font-bold mb-6 text-amber-300">Our Packages</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="/services" className="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 group">
