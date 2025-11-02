@@ -86,16 +86,16 @@ export default function AdminDashboardLayout({ children }: AdminLayoutProps) {
       icon: BookOpen,
       title: "Classes",
     },
-    {
-      href: "/admin/course-requests",
-      icon: MessageSquare,
-      title: "Course Requests",
-    },
-    {
-      href: "/admin/course-bookings",
-      icon: BookOpen,
-      title: "Course Bookings",
-    },
+    // {
+    //   href: "/admin/course-requests",
+    //   icon: MessageSquare,
+    //   title: "Course Requests",   
+    // },
+    // {
+    //   href: "/admin/course-bookings",
+    //   icon: BookOpen,
+    //   title: "Course Bookings",
+    // },
     {
       href: "/admin/services",
       icon: Briefcase,
