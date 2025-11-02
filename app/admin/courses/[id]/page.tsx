@@ -211,7 +211,7 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
         <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
-        <p className="text-sm text-muted-foreground">Loading course details...</p>
+        <p className="text-sm text-muted-foreground">Loading class details...</p>
       </div>
     )
   }
@@ -219,14 +219,14 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
   if (!course) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh]">
-        <h2 className="text-2xl font-bold mb-2">Course Not Found</h2>
+        <h2 className="text-2xl font-bold mb-2">Class Not Found</h2>
         <p className="text-muted-foreground mb-4">
-          The requested course could not be found.
+          The requested class could not be found.
         </p>
         <Button asChild>
           <a href="/admin/courses">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Courses
+            Back to Classes
           </a>
         </Button>
       </div>

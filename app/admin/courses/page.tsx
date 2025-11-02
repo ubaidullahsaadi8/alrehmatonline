@@ -126,12 +126,12 @@ export default function CoursesPage() {
       } else {
         toast({
           title: "Error",
-          description: "Failed to fetch courses",
+          description: "Failed to fetch classes",
           variant: "destructive"
         })
       }
     } catch (error) {
-      console.error('Error fetching courses:', error)
+      console.error('Error fetching classes:', error)
       toast({
         title: "Error",
         description: "Something went wrong",
@@ -170,7 +170,7 @@ export default function CoursesPage() {
       if (response.ok) {
         toast({
           title: "Success",
-          description: "Course created successfully"
+          description: "Class created successfully"
         })
         
         setIsCreateDialogOpen(false)
@@ -179,12 +179,12 @@ export default function CoursesPage() {
       } else {
         toast({
           title: "Error",
-          description: data.error || "Failed to create course",
+          description: data.error || "Failed to create class",
           variant: "destructive"
         })
       }
     } catch (error) {
-      console.error('Error creating course:', error)
+      console.error('Error creating class:', error)
       toast({
         title: "Error",
         description: "Something went wrong",
@@ -225,7 +225,7 @@ export default function CoursesPage() {
       if (response.ok) {
         toast({
           title: "Success",
-          description: "Course updated successfully"
+          description: "Class updated successfully"
         })
         
         setIsEditDialogOpen(false)
@@ -234,12 +234,12 @@ export default function CoursesPage() {
       } else {
         toast({
           title: "Error",
-          description: data.error || "Failed to update course",
+          description: data.error || "Failed to update class",
           variant: "destructive"
         })
       }
     } catch (error) {
-      console.error('Error updating course:', error)
+      console.error('Error updating class:', error)
       toast({
         title: "Error",
         description: "Something went wrong",
@@ -262,7 +262,7 @@ export default function CoursesPage() {
       if (response.ok) {
         toast({
           title: "Success",
-          description: "Course deleted successfully"
+          description: "Class deleted successfully"
         })
         
         setIsDeleteDialogOpen(false)
@@ -270,12 +270,12 @@ export default function CoursesPage() {
       } else {
         toast({
           title: "Error",
-          description: "Failed to delete course",
+          description: "Failed to delete class",
           variant: "destructive"
         })
       }
     } catch (error) {
-      console.error('Error deleting course:', error)
+      console.error('Error deleting class:', error)
       toast({
         title: "Error",
         description: "Something went wrong",
@@ -350,9 +350,9 @@ export default function CoursesPage() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Courses</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Classes</h1>
           <p className="text-muted-foreground">
-            Manage your courses and training programs
+            Manage your classes and training programs
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -360,7 +360,7 @@ export default function CoursesPage() {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search courses..."
+              placeholder="Search classes..."
               className="pl-8 w-full md:w-[250px] bg-white dark:bg-gray-900"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -374,7 +374,7 @@ export default function CoursesPage() {
             setIsCreateDialogOpen(true)
           }}>
             <Plus className="h-4 w-4 mr-2" />
-            Add Course
+            Add Class
           </Button>
         </div>
       </div>
@@ -382,14 +382,14 @@ export default function CoursesPage() {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20">
           <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-          <p className="text-muted-foreground mt-2">Loading courses...</p>
+          <p className="text-muted-foreground mt-2">Loading classes...</p>
         </div>
       ) : filteredCourses.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
           <div className="h-12 w-12 mb-2 opacity-30 border-2 rounded-full border-dashed flex items-center justify-center">
             <GraduationCap className="h-6 w-6" />
           </div>
-          <p>No courses found</p>
+          <p>No classes found</p>
           <Button 
             variant="outline" 
             className="mt-4"
@@ -399,7 +399,7 @@ export default function CoursesPage() {
             }}
           >
             <Plus className="h-4 w-4 mr-2" />
-            Add your first course
+            Add your first class
           </Button>
         </div>
       ) : (
@@ -486,9 +486,9 @@ export default function CoursesPage() {
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Add New Course</DialogTitle>
+            <DialogTitle>Add New Class</DialogTitle>
             <DialogDescription>
-              Create a new course to showcase on your website.
+              Create a new class to showcase on your website.
             </DialogDescription>
           </DialogHeader>
           
@@ -509,7 +509,7 @@ export default function CoursesPage() {
                 id="description"
                 value={formData.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
-                placeholder="Brief description of the course"
+                placeholder="Brief description of the class"
                 className="resize-none"
                 rows={2}
               />
@@ -607,7 +607,7 @@ export default function CoursesPage() {
                 id="content"
                 value={formData.content}
                 onChange={(e) => setFormData({...formData, content: e.target.value})}
-                placeholder="Detailed description of your course"
+                placeholder="Detailed description of your class"
                 rows={6}
               />
             </div>
@@ -639,7 +639,7 @@ export default function CoursesPage() {
                   Creating...
                 </>
               ) : (
-                "Create Course"
+                "Create Class"
               )}
             </Button>
           </DialogFooter>
@@ -650,9 +650,9 @@ export default function CoursesPage() {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Edit Course</DialogTitle>
+            <DialogTitle>Edit Class</DialogTitle>
             <DialogDescription>
-              Update the details for this course.
+              Update the details for this class.
             </DialogDescription>
           </DialogHeader>
           
@@ -797,7 +797,7 @@ export default function CoursesPage() {
                   Updating...
                 </>
               ) : (
-                "Update Course"
+                "Update Class"
               )}
             </Button>
           </DialogFooter>
@@ -810,7 +810,7 @@ export default function CoursesPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the course "{selectedCourse?.title}". 
+              This will permanently delete the class "{selectedCourse?.title}". 
               This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -827,7 +827,7 @@ export default function CoursesPage() {
                   Deleting...
                 </>
               ) : (
-                "Delete Course"
+                "Delete Class"
               )}
             </AlertDialogAction>
           </AlertDialogFooter>

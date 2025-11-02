@@ -75,7 +75,7 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
       
       // Fetch course details
       const courseRes = await fetch(`/api/admin/courses/${params.id}`)
-      if (!courseRes.ok) throw new Error("Failed to fetch course")
+      if (!courseRes.ok) throw new Error("Failed to fetch class")
       const courseData = await courseRes.json()
       setCourse(courseData)
 
@@ -89,7 +89,7 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
       console.error("Error fetching data:", error)
       toast({
         title: "Error",
-        description: "Failed to load course students",
+        description: "Failed to load class students",
         variant: "destructive"
       })
     } finally {
@@ -103,7 +103,6 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
 
     try {
       setRemoving(true)
-      
       const response = await fetch(
         `/api/admin/courses/${params.id}/students/${selectedStudent.id}`, 
         { method: "DELETE" }
@@ -115,9 +114,9 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
 
       toast({
         title: "Success",
-        description: "Student removed from course successfully"
+        description: "Student removed from class successfully"
       })
-
+      
       // Remove student from local state
       setStudents(students.filter(s => s.id !== selectedStudent.id))
       setIsDeleteDialogOpen(false)
@@ -126,7 +125,7 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
       console.error("Error removing student:", error)
       toast({
         title: "Error",
-        description: "Failed to remove student from course",
+        description: "Failed to remove student from class",
         variant: "destructive"
       })
     } finally {
@@ -141,12 +140,12 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
         <p className="text-muted-foreground mt-2">Loading students...</p>
       </div>
     )
-  }
+  }   
 
   if (!course) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <p className="text-muted-foreground">Course not found</p>
+        <p className="text-muted-foreground">Class not found</p>
         <Button 
           variant="outline" 
           className="mt-4"
@@ -179,7 +178,7 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Course Students</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Class Students</h1>
             <p className="text-muted-foreground">
               Manage students enrolled in {course.title}
             </p>
@@ -214,7 +213,7 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
             <div>
               <CardTitle>Enrolled Students</CardTitle>
               <CardDescription>
-                {students.length} students enrolled in this course
+                {students.length} students enrolled in this class
               </CardDescription>
             </div>
             {filteredStudents.length !== students.length && (
@@ -287,7 +286,7 @@ export default function CourseStudentsPage({ params }: { params: { id: string } 
           <AlertDialogHeader>
             <AlertDialogTitle>Remove Student</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove {selectedStudent?.name} from this course?
+              Are you sure you want to remove {selectedStudent?.name} from this class?
               This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>

@@ -84,7 +84,7 @@ export default function AdminDashboardLayout({ children }: AdminLayoutProps) {
     {
       href: "/admin/courses",
       icon: BookOpen,
-      title: "Courses",
+      title: "Classes",
     },
     {
       href: "/admin/course-requests",
@@ -183,6 +183,8 @@ export default function AdminDashboardLayout({ children }: AdminLayoutProps) {
           {navigation}
         </ScrollArea>
       </div>
+
+
 
       <div className="flex flex-col w-full min-h-screen lg:ml-64">
         {}
