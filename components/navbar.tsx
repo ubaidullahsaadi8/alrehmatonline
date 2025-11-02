@@ -106,12 +106,6 @@ export default function Navbar() {
               Reviews
             </Link>
             <Link
-              href="/courses"
-              className="px-4 py-2 text-white hover:text-[#E6B325] hover:bg-white/10 rounded-lg font-semibold text-sm transition-colors"
-            >
-              Courses
-            </Link>
-            <Link
               href="/services"
               className="px-4 py-2 text-white hover:text-[#E6B325] hover:bg-white/10 rounded-lg font-semibold text-sm transition-colors"
             >
