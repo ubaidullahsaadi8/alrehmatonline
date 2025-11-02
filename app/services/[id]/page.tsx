@@ -59,8 +59,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
         setLoading(false)
       })
       .catch((err) => {
-        console.error("Failed to load service:", err)
-        setError("Failed to load service. Please try again later.")
+        console.error("Failed to load package:", err)
+        setError("Failed to load package. Please try again later.")
         setLoading(false)
       })
   }, [serviceId])
@@ -96,14 +96,14 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
       })
 
       if (response.ok) {
-        setSuccessMessage("Your service information request has been submitted successfully. We'll contact you soon!")
+        setSuccessMessage("Your package information request has been submitted successfully. We'll contact you soon!")
         target.reset()
       } else {
         const data = await response.json()
         setErrorMessage(data.error || "Something went wrong. Please try again.")
       }
     } catch (error) {
-      console.error("Error submitting service request:", error)
+      console.error("Error submitting package request:", error)
       setErrorMessage("Failed to submit your request. Please try again later.")
     } finally {
       setSubmitting(false)
@@ -117,7 +117,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
     setErrorMessage("")
 
     if (!date) {
-      setErrorMessage("Please select a date for your service booking")
+      setErrorMessage("Please select a date for your package booking")
       setSubmitting(false)
       return
     }
@@ -144,7 +144,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
       })
 
       if (response.ok) {
-        setSuccessMessage("Your service has been booked successfully. We'll send you a confirmation email shortly.")
+        setSuccessMessage("Your package has been booked successfully. We'll send you a confirmation email shortly.")
         target.reset()
         setDate(undefined)
         setTime("09:00")
@@ -153,8 +153,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
         setErrorMessage(data.error || "Something went wrong. Please try again.")
       }
     } catch (error) {
-      console.error("Error booking service:", error)
-      setErrorMessage("Failed to book your service. Please try again later.")
+      console.error("Error booking package:", error)
+      setErrorMessage("Failed to book your package. Please try again later.")
     } finally {
       setSubmitting(false)
     }
@@ -164,7 +164,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <div className="pt-32 text-center text-gray-900 text-xl">Loading service...</div>
+        <div className="pt-32 text-center text-gray-900 text-xl">Loading package...</div>
       </div>
     )
   }
@@ -174,14 +174,14 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
       <div className="min-h-screen bg-white">
         <Navbar />
         <div className="pt-32 text-center px-4">
-          <h1 className="text-3xl text-gray-900 mb-4">{error || "Service not found"}</h1>
+          <h1 className="text-3xl text-gray-900 mb-4">{error || "package not found"}</h1>
           <p className="text-gray-600 mb-6">
             {error
               ? "Please make sure the database is initialized by running the setup scripts."
-              : "The service you're looking for doesn't exist."}
+              : "The package you're looking for doesn't exist."}
           </p>
           <Link href="/services">
-            <Button className="bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] text-white hover:from-[#1a4d3c] hover:to-[#0f3a2e]">Back to Services</Button>
+            <Button className="bg-gradient-to-r from-[#0f3a2e] to-[#1a4d3c] text-white hover:from-[#1a4d3c] hover:to-[#0f3a2e]">Back to Packages</Button>
           </Link>
         </div>
       </div>
@@ -273,7 +273,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
             }`}>
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Services
+              Back to Packages
             </Button>
           </Link>
 
@@ -288,7 +288,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
               <div>
                 {service.featured && <Badge className={`bg-gradient-to-r from-[#E6B325] to-[#D4A017] text-white mb-4 transition-all duration-1000 delay-200 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5'
-                }`}>Popular Service</Badge>}
+                }`}>Popular Package</Badge>}
 
                 <h1 className={`text-4xl md:text-5xl font-bold text-gray-900 mb-6 transition-all duration-1000 delay-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -359,8 +359,8 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
 
                   <Tabs defaultValue="request" className="mt-6">
                     <TabsList className="grid grid-cols-2 mb-4 bg-white">
-                      <TabsTrigger value="request" className="data-[state=active]:bg-[#E6B325] data-[state=active]:text-white">Service Info</TabsTrigger>
-                      <TabsTrigger value="booking" className="data-[state=active]:bg-[#E6B325] data-[state=active]:text-white">Book Service</TabsTrigger>
+                      <TabsTrigger value="request" className="data-[state=active]:bg-[#E6B325] data-[state=active]:text-white">Package Info</TabsTrigger>
+                      <TabsTrigger value="booking" className="data-[state=active]:bg-[#E6B325] data-[state=active]:text-white">Book Package</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="request">
@@ -420,7 +420,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
                           <Textarea 
                             id="message" 
                             name="message" 
-                            placeholder="I'm interested in learning more about this service..." 
+                            placeholder="I'm interested in learning more about this package..." 
                             required 
                             className="min-h-20 !bg-white border border-gray-200 text-gray-900 placeholder:text-gray-400 hover:!border-[#E6B325] focus:!border-[#E6B325] focus:ring-2 focus:!ring-[#E6B325]/20 rounded-3xl px-4 py-3 transition-all duration-300 shadow-sm resize-none"
                           />
@@ -432,7 +432,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
                           disabled={submitting}
                         >
                           <span className="pointer-events-none absolute top-0 left-[-30%] h-full w-1/3 bg-white/20 blur-md -skew-x-12 transition-all duration-700 ease-out group-hover:left-[130%]"></span>
-                          <span className="relative z-10">{submitting ? "Submitting..." : "Request Service Information"}</span>
+                          <span className="relative z-10">{submitting ? "Submitting..." : "Request Package Information"}</span>
                         </Button>
                       </form>
                     </TabsContent>
@@ -557,7 +557,7 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ id: st
                           disabled={submitting}
                         >
                           <span className="pointer-events-none absolute top-0 left-[-30%] h-full w-1/3 bg-white/20 blur-md -skew-x-12 transition-all duration-700 ease-out group-hover:left-[130%]"></span>
-                          <span className="relative z-10">{submitting ? "Booking..." : "Book This Service"}</span>
+                          <span className="relative z-10">{submitting ? "Booking..." : "Book This Package"}</span>
                         </Button>
                       </form>
                     </TabsContent>

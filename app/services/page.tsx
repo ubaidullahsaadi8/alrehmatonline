@@ -100,7 +100,7 @@ export default function ServicesPage() {
             Discover Our{" "}
             <span className="relative inline-block">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E6B325] via-[#D4A017] to-[#E6B325] animate-gradient-flow bg-size-200">
-                Exceptional Services
+                Exceptional Packages
               </span>
               <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#E6B325] to-transparent animate-shimmer" />
             </span>
@@ -108,7 +108,7 @@ export default function ServicesPage() {
 
           {/* Description with fade */}
           <p className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-gray-600 px-4 animate-fade-in-scale" style={{ animationDelay: "0.6s" }}>
-            Comprehensive Quran learning solutions designed with excellence and care. Each service is crafted to provide you with the best learning experience.
+            Comprehensive Quran learning solutions designed with excellence and care. Each package is crafted to provide you with the best learning experience.
           </p>
         </div>
       </section>
@@ -126,7 +126,7 @@ export default function ServicesPage() {
             </div>
           ) : services.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-gray-500 text-lg">No services available at the moment.</p>
+              <p className="text-gray-500 text-lg">No packages available at the moment.</p>
             </div>
           ) : (
             <>
@@ -177,7 +177,7 @@ export default function ServicesPage() {
                         ) : (
                           <li className="flex items-start gap-3 text-gray-700 text-sm">
                             <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: bgColor }} />
-                            <span>Service details available on request</span>
+                            <span>Package details available on request</span>
                           </li>
                         )}
                       </ul>
