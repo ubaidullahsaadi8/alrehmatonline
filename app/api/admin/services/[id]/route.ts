@@ -87,6 +87,9 @@ export async function PUT(
       )
     }
 
+    // Split content by newlines to create features array
+    const featuresArray = content ? content.split('\n').filter((line: string) => line.trim() !== '') : []
+
     // Update service
     await sql`
       UPDATE services
@@ -94,7 +97,7 @@ export async function PUT(
         title = ${title},
         description = ${description},
         image = ${imageUrl || '/placeholder.jpg'},
-        features = ${content ? [content] : []},
+        features = ${featuresArray},
         price = ${price ? String(price) : '0'},
         currency = ${currency || 'USD'},
         featured = ${featured || false},

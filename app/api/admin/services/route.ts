@@ -71,6 +71,8 @@ export async function POST(req: NextRequest) {
 
     const id = `service-${Date.now()}`
 
+    // Split content by newlines to create features array
+    const featuresArray = content ? content.split('\n').filter((line: string) => line.trim() !== '') : []
     
     await sql`
       INSERT INTO services (
@@ -87,7 +89,7 @@ export async function POST(req: NextRequest) {
         ${title},
         ${description},
         ${imageUrl || '/placeholder.jpg'},
-        ${content ? [content] : []}, 
+        ${featuresArray}, 
         ${price ? String(price) : '0'},
         ${currency || 'USD'},
         ${featured || false}

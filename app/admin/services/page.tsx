@@ -527,14 +527,15 @@ export default function ServicesPage() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="content">Full Content</Label>
+              <Label htmlFor="content">Service Features (One per line)</Label>
               <Textarea
                 id="content"
                 value={formData.content}
                 onChange={(e) => setFormData({...formData, content: e.target.value})}
-                placeholder="Detailed description of your service"
-                rows={6}
+                placeholder="Enter each feature on a new line:\n20 Classes Per Month\nOne to One Live Class\n30 Minutes/Live Session"
+                rows={8}
               />
+              <p className="text-xs text-muted-foreground">Each line will appear as a bullet point with a checkmark icon on the frontend</p>
             </div>
             
             <div className="flex items-center space-x-2">
@@ -645,13 +646,15 @@ export default function ServicesPage() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="edit-content">Full Content</Label>
+              <Label htmlFor="edit-content">Service Features (One per line)</Label>
               <Textarea
                 id="edit-content"
                 value={formData.content}
                 onChange={(e) => setFormData({...formData, content: e.target.value})}
-                rows={6}
+                placeholder="Enter each feature on a new line:\n20 Classes Per Month\nOne to One Live Class\n30 Minutes/Live Session"
+                rows={8}
               />
+              <p className="text-xs text-muted-foreground">Each line will appear as a bullet point with a checkmark icon on the frontend</p>
             </div>
             
             <div className="flex items-center space-x-2">

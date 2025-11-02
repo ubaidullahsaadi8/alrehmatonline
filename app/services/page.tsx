@@ -130,77 +130,66 @@ export default function ServicesPage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {services.map((service, index) => {
                   const currencyInfo = getCurrencyByCode(service.currency || 'USD')
-                  const priceDisplay = service.price ? `${currencyInfo.symbol}${service.price}` : 'Contact for pricing'
+                  const bgColor = index % 4 === 0 ? '#D4A017' : index % 4 === 1 ? '#E6B325' : index % 4 === 2 ? '#D4A017' : '#0f3a2e'
                   
                   return (
                   <div
                     key={service.id}
-                    className={`group relative bg-white rounded-[2rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_60px_rgba(230,179,37,0.3)] transition-all duration-700 border-4 border-white hover:border-[#E6B325]/50 flex flex-col h-full transform hover:scale-105 hover:-translate-y-4 ${
+                    className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col ${
                       isVisible ? 'animate-slide-up-fade' : 'opacity-0'
                     }`}
                     style={{
-                      animationDelay: `${index * 0.15}s`,
-                      backgroundColor: index % 4 === 0 ? '#D4A017' : index % 4 === 1 ? '#E6B325' : index % 4 === 2 ? '#D4A017' : '#0f3a2e'
+                      animationDelay: `${index * 0.15}s`
                     }}
                   >
-                    {/* Sparkle Effects */}
-                    <Sparkles className="absolute top-4 left-4 w-6 h-6 text-white opacity-50 group-hover:opacity-100 transition-opacity duration-500 animate-pulse z-20" />
-                    
-                    {/* Content Container */}
-                    <div className="p-6 sm:p-8 flex flex-col flex-grow relative z-20">
-                      {/* Price Tag at Top */}
-                      <div className="text-center mb-6">
-                        <div className="text-4xl sm:text-5xl font-black text-white mb-2">
-                          {priceDisplay}
-                        </div>
-                        <div className="text-sm text-white/80 font-semibold">
-                          {currencyInfo.code} per Month
-                        </div>
+                    {/* Colored Top Section with Price */}
+                    <div 
+                      className="py-6 px-6 text-center"
+                      style={{ backgroundColor: bgColor }}
+                    >
+                      <div className="text-2xl font-bold text-white">
+                        {currencyInfo.symbol}{service.price} {currencyInfo.code} per Month
                       </div>
-                      
+                    </div>
+                    
+                    {/* White Bottom Section */}
+                    <div className="bg-white p-6 flex flex-col flex-grow">
                       {/* Title */}
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 text-center">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-6 text-center">
                         {service.title}
                       </h3>
                       
-                      {/* Description */}
-                      <p className="text-white/90 text-sm leading-relaxed mb-6 text-center line-clamp-2">
-                        {service.description}
-                      </p>
-                      
-                      {/* Features List with icons */}
+                      {/* Features List with gold checkmark icons */}
                       <ul className="space-y-3 mb-6 flex-grow">
                         {service.features && service.features.length > 0 ? (
-                          service.features.slice(0, 3).map((feature, idx) => (
+                          service.features.map((feature, idx) => (
                             <li
                               key={idx}
-                              className="flex items-center gap-3 text-white text-sm group/item transition-all duration-500"
+                              className="flex items-start gap-3 text-gray-700 text-sm"
                             >
-                              <div className="flex-shrink-0">
-                                <CheckCircle2 className="w-5 h-5 text-white" />
-                              </div>
+                              <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: bgColor }} />
                               <span className="leading-relaxed">{feature}</span>
                             </li>
                           ))
                         ) : (
-                          <li className="flex items-center gap-3 text-white text-sm">
-                            <CheckCircle2 className="w-5 h-5 text-white" />
+                          <li className="flex items-start gap-3 text-gray-700 text-sm">
+                            <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: bgColor }} />
                             <span>Service details available on request</span>
                           </li>
                         )}
                       </ul>
                       
                       {/* CTA Button */}
-                      <div className="mt-auto">
-                        <Link href={`/services/${service.id}`} className="block">
-                          <Button className="w-full group/btn relative overflow-hidden px-6 py-4 text-sm font-bold bg-white text-[#0f3a2e] hover:bg-white/90 transition-all duration-300 rounded-full shadow-lg hover:shadow-xl">
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                              Get Free Trial
-                              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                            </span>
+                      <div className="mt-auto flex justify-center">
+                        <Link href={`/services/${service.id}`}>
+                          <Button 
+                            className="px-8 py-2.5 text-sm font-bold text-white hover:opacity-90 transition-all duration-300 rounded-full shadow-md"
+                            style={{ backgroundColor: '#0f3a2e' }}
+                          >
+                            Get Free Trial
                           </Button>
                         </Link>
                       </div>
@@ -208,7 +197,7 @@ export default function ServicesPage() {
                       {/* Featured Badge */}
                       {service.featured && (
                         <div className="absolute top-4 right-4">
-                          <Badge className="bg-white text-[#0f3a2e] border-none py-1.5 px-3 text-xs font-black shadow-lg">
+                          <Badge className="bg-red-500 text-white border-none py-1 px-2 text-xs font-bold shadow-lg">
                             <Star className="w-3 h-3 mr-1 fill-current" />
                             Popular
                           </Badge>
