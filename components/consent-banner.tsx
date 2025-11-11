@@ -67,27 +67,29 @@ export function ConsentBanner() {
   if (!mounted || !showConsent) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-[#1a1a1a] to-[#0f0f0f] border-t border-[rgba(255,255,255,0.1)] shadow-2xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex-1">
-            <h3 className="text-white font-semibold mb-2">Cookie & Consent Settings</h3>
-            <p className="text-gray-400 text-sm">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a] border-t border-[#2d5016] shadow-2xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        <div className="flex flex-col gap-4">
+          {/* Content */}
+          <div className="flex-1 pr-8 sm:pr-0">
+            <h3 className="text-white font-semibold mb-2 text-sm sm:text-base">Cookie & Consent Settings</h3>
+            <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
               We use cookies and analytics to improve your experience and understand how you use our site. 
               By clicking "Accept", you consent to our use of cookies and analytics.
             </p>
           </div>
 
-          <div className="flex items-center gap-3 flex-shrink-0">
+          {/* Buttons - Stack on mobile, row on desktop */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3">
             <button
               onClick={handleReject}
-              className="px-4 py-2 rounded-lg text-gray-300 hover:text-white border border-[rgba(255,255,255,0.2)] hover:border-[rgba(255,255,255,0.4)] transition-all duration-200 text-sm font-medium"
+              className="px-4 py-2 rounded-lg text-white border border-[#2d5016] hover:bg-[#2d5016] bg-transparent transition-all duration-200 text-sm font-medium"
             >
               Reject
             </button>
             <button
               onClick={handleAccept}
-              className="px-6 py-2 rounded-lg bg-[#6d28d9] hover:bg-[#5b21b6] text-white transition-all duration-200 text-sm font-medium shadow-lg hover:shadow-xl"
+              className="px-6 py-2 rounded-lg bg-[#d4a574] hover:bg-[#c9945f] text-[#1a1a1a] transition-all duration-200 text-sm font-semibold shadow-lg hover:shadow-xl"
             >
               Accept
             </button>
@@ -97,10 +99,10 @@ export function ConsentBanner() {
         {/* Close button */}
         <button
           onClick={handleReject}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors"
           aria-label="Close consent banner"
         >
-          <X size={20} />
+          <X size={18} className="sm:w-5 sm:h-5" />
         </button>
       </div>
     </div>
