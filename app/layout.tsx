@@ -16,11 +16,14 @@ import WhatsAppFloat from "@/components/whatsapp-float"
 export const metadata: Metadata = {
   title: "LearnQuraan - Online Quran Academy",
   description: "Learn Quran online with qualified teachers. Professional Quran teaching services for all ages. Start your Quranic journey today.",
-  generator: "v0.app",
+  generator: "HatBrain",
   icons: {
     icon: '/white-logo.png',
     shortcut: '/white-logo.png',
     apple: '/white-logo.png',
+  },
+  verification: {
+    google: "1S3oeoGh87dL3wkiehVsETufWIPKu7IRSIr3WP-ur8I",
   },
 }
 
