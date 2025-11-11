@@ -13,6 +13,7 @@ import { CurrencyProvider } from "@/lib/currency-context"
 import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "@/components/providers"
 import WhatsAppFloat from "@/components/whatsapp-float"
+import { ConsentBanner } from "@/components/consent-banner"
 
 export const metadata: Metadata = {
   title: "LearnQuraan - Online Quran Academy",
@@ -54,6 +55,7 @@ export default function RootLayout({
               <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
               <Toaster />
               <WhatsAppFloat />
+              <ConsentBanner />
             </Providers>
           </CurrencyProvider>
         </ThemeProvider>
